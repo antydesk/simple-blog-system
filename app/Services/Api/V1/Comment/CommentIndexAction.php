@@ -22,7 +22,6 @@ class CommentIndexAction
             perPage: $commentListDto->perPage,
             page: $commentListDto->page,
             q: $commentListDto->q,
-            relations: ['user']
         );
     }
 }

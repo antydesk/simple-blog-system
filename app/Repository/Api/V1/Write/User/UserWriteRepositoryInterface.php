@@ -3,10 +3,9 @@
 namespace App\Repository\Api\V1\Write\User;
 
 
-use App\Dto\Api\V1\Register\UserRegisterDto;
+use App\Dto\Api\V1\Auth\UserRegisterDto;
 use App\Dto\Api\V1\User\UserUpdateDto;
 use App\Models\User;
-use App\Services\Api\V1\User\UserDestroyAction;
 
 interface UserWriteRepositoryInterface
 {

@@ -1,23 +1,17 @@
 <?php
 
 use App\Http\Controllers\Api\V1\Comment\CommentController;
-use App\Http\Controllers\Api\V1\Login\UserLoginController;
 use App\Http\Controllers\Api\V1\Post\PostController;
-use App\Http\Controllers\Api\V1\Register\UserRegisterController;
 use App\Http\Controllers\Api\V1\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('v1')->group(function () {
-    Route::post('/register', [UserRegisterController::class, 'register']);
-    Route::post('/login', [UserLoginController::class, 'login']);
-
     Route::middleware('auth:api')->group(function () {
         Route::prefix('users')->group(function () {
             Route::get('/{user_id}', [UserController::class, 'show']);
             Route::put('/{user_id}', [UserController::class, 'update']);
             Route::delete('/{user_id}', [UserController::class, 'destroy']);
-
 
         Route::prefix('/{user_id}/posts')->group(function () {
             Route::post('/', [PostController::class, 'create']);

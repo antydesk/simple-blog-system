@@ -12,14 +12,47 @@
         }
     ],
     "paths": {
-        "/api/v1/login": {
+        "/auth/me": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Получить текущего авторизованного пользователя",
+                "operationId": "8c54378ea51c61b550ef60877346fffe",
+                "responses": {
+                    "200": {
+                        "description": "Информация о пользователе",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/UserResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Неавторизован"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/auth/login": {
             "post": {
                 "tags": [
                     "Auth"
                 ],
                 "summary": "Вход пользователя",
-                "description": "Аутентификация пользователя по email и паролю. В случае успешного входа возвращается access token.",
-                "operationId": "462cfabf34c05c0f2c7bebce68be7c49",
+                "operationId": "e273b4c40367e424389e969285e26ad8",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -40,10 +73,9 @@
                                         "format": "password",
                                         "example": "secret123"
                                     },
-                                    "password_confirmation": {
-                                        "type": "string",
-                                        "format": "password",
-                                        "example": "secret123"
+                                    "remember": {
+                                        "type": "boolean",
+                                        "example": true
                                     }
                                 },
                                 "type": "object"
@@ -53,66 +85,13 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Успешный вход",
+                        "description": "Успешная авторизация",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "token": {
-                                            "type": "string",
-                                            "example": "eyJ0eXAiOiJKV1Qi..."
-                                        },
-                                        "user": {
-                                            "properties": {
-                                                "id": {
-                                                    "type": "integer",
-                                                    "example": 1
-                                                },
-                                                "name": {
-                                                    "type": "string",
-                                                    "example": "Иван Иванов"
-                                                },
-                                                "email": {
-                                                    "type": "string",
-                                                    "example": "ivan@example.com"
-                                                }
-                                            },
-                                            "type": "object"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Ошибка валидации",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Переданы неверные данные."
-                                        },
-                                        "errors": {
-                                            "properties": {
-                                                "email": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "type": "string",
-                                                        "example": "Поле email обязательно."
-                                                    }
-                                                },
-                                                "password": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "type": "string",
-                                                        "example": "Поле password обязательно."
-                                                    }
-                                                }
-                                            },
-                                            "type": "object"
+                                        "data": {
+                                            "$ref": "#/components/schemas/CredentialResource"
                                         }
                                     },
                                     "type": "object"
@@ -121,41 +100,97 @@
                         }
                     },
                     "401": {
-                        "description": "Неверные учетные данные",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Неверный email или пароль."
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
+                        "description": "Неверные учетные данные"
                     }
                 }
             }
         },
-        "/api/v1/register": {
+        "/auth/logout": {
             "post": {
                 "tags": [
                     "Auth"
                 ],
-                "summary": "Регистрация нового пользователя",
-                "description": "Создание нового аккаунта пользователя.",
-                "operationId": "67da1145b75e7969b98fbf735841436c",
+                "summary": "Выход пользователя",
+                "operationId": "95385af276b11bafff26432f304136f9",
+                "responses": {
+                    "204": {
+                        "description": "Успешный выход (без контента)"
+                    },
+                    "401": {
+                        "description": "Неавторизован"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/auth/refresh-token": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Обновление access токена",
+                "operationId": "7e8a91a9c41b5939a7bc0e27c9322a86",
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
                                 "required": [
+                                    "refresh_token"
+                                ],
+                                "properties": {
+                                    "refresh_token": {
+                                        "type": "string",
+                                        "example": "your-refresh-token"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Обновленный токен",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/CredentialResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Неверный refresh token"
+                    }
+                }
+            }
+        },
+        "/auth/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Регистрация нового пользователя",
+                "operationId": "a16ac946f4281c3cce8f36c2796e37ba",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
                                     "email",
-                                    "password",
-                                    "name"
+                                    "password"
                                 ],
                                 "properties": {
                                     "name": {
@@ -171,11 +206,6 @@
                                         "type": "string",
                                         "format": "password",
                                         "example": "secret123"
-                                    },
-                                    "password_confirmation": {
-                                        "type": "string",
-                                        "format": "password",
-                                        "example": "secret123"
                                     }
                                 },
                                 "type": "object"
@@ -185,31 +215,13 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Успешная регистрация",
+                        "description": "Пользователь успешно зарегистрирован",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "token": {
-                                            "type": "string",
-                                            "example": "eyJ0eXAiOiJKV1Qi..."
-                                        },
-                                        "user": {
-                                            "properties": {
-                                                "id": {
-                                                    "type": "integer",
-                                                    "example": 1
-                                                },
-                                                "name": {
-                                                    "type": "string",
-                                                    "example": "Иван Иванов"
-                                                },
-                                                "email": {
-                                                    "type": "string",
-                                                    "example": "ivan@example.com"
-                                                }
-                                            },
-                                            "type": "object"
+                                        "data": {
+                                            "$ref": "#/components/schemas/CredentialResource"
                                         }
                                     },
                                     "type": "object"
@@ -218,32 +230,7 @@
                         }
                     },
                     "422": {
-                        "description": "Ошибка валидации",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "The email has already been taken."
-                                        },
-                                        "errors": {
-                                            "properties": {
-                                                "email": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "type": "string",
-                                                        "example": "Поле email обязательно."
-                                                    }
-                                                }
-                                            },
-                                            "type": "object"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
+                        "description": "Ошибка валидации"
                     }
                 }
             }
@@ -289,7 +276,7 @@
                                 "schema": {
                                     "type": "array",
                                     "items": {
-                                        "$ref": "#/components/schemas/CommentResource"
+                                        "$ref": "#/components/schemas/CommentPaginatedResource"
                                     }
                                 }
                             }
@@ -358,10 +345,12 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/CommentResource"
-                                    }
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/CommentPaginatedResource"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
@@ -424,7 +413,19 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Комментарий успешно создан"
+                        "description": "Комментарий успешно создан",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/CommentWithParentResource"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 },
                 "security": [
@@ -473,7 +474,12 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/CommentResource"
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/CommentWithParentResource"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
@@ -539,7 +545,12 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/CommentResource"
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/CommentOnlyResource"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
@@ -634,10 +645,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/PostResource"
-                                    }
+                                    "$ref": "#/components/schemas/PostPaginatedResource"
                                 }
                             }
                         }
@@ -702,7 +710,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PostResource"
+                                    "$ref": "#/components/schemas/PostOnlyResource"
                                 }
                             }
                         }
@@ -744,11 +752,16 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Информация о посте",
+                        "description": "Информация о посте без связей",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PostResource"
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/PostResource"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
@@ -816,7 +829,12 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/PostResource"
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/PostOnlyResource"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             }
                         }
@@ -1153,6 +1171,116 @@
     },
     "components": {
         "schemas": {
+            "CredentialResource": {
+                "properties": {
+                    "access_token": {
+                        "type": "string",
+                        "example": "eyJ0eXAiOiJKV1Qi..."
+                    },
+                    "refresh_token": {
+                        "type": "string",
+                        "example": "d3c9a12b..."
+                    },
+                    "token_type": {
+                        "type": "string",
+                        "example": "Bearer"
+                    },
+                    "expires_in": {
+                        "type": "integer",
+                        "example": 3600
+                    }
+                },
+                "type": "object"
+            },
+            "CommentOnlyResource": {
+                "title": "CommentResource",
+                "description": "Ресурс комментария",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 101
+                    },
+                    "content": {
+                        "type": "string",
+                        "example": "Это комментарий к посту"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-05-04T14:00:00Z"
+                    }
+                },
+                "type": "object"
+            },
+            "CommentPaginatedResource": {
+                "title": "CommentPaginatedResource",
+                "description": "Пагинированный список комментариев",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CommentOnlyResource"
+                        }
+                    },
+                    "links": {
+                        "properties": {
+                            "first": {
+                                "type": "string",
+                                "example": "http://127.0.0.1:8000/api/v1/posts/10/comments?page=1"
+                            },
+                            "last": {
+                                "type": "string",
+                                "example": "http://127.0.0.1:8000/api/v1/posts/10/comments?page=1"
+                            },
+                            "prev": {
+                                "type": "string",
+                                "example": null,
+                                "nullable": true
+                            },
+                            "next": {
+                                "type": "string",
+                                "example": null,
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "meta": {
+                        "properties": {
+                            "current_page": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "from": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "last_page": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "path": {
+                                "type": "string",
+                                "example": "http://127.0.0.1:8000/api/v1/posts/10/comments"
+                            },
+                            "per_page": {
+                                "type": "integer",
+                                "example": 25
+                            },
+                            "to": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "total": {
+                                "type": "integer",
+                                "example": 1
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
             "CommentResource": {
                 "title": "CommentResource",
                 "description": "Ресурс комментария",
@@ -1168,10 +1296,140 @@
                     "user": {
                         "$ref": "#/components/schemas/UserResource"
                     },
+                    "post": {
+                        "$ref": "#/components/schemas/PostOnlyResource"
+                    },
                     "created_at": {
                         "type": "string",
                         "format": "date-time",
                         "example": "2025-05-04T14:00:00Z"
+                    }
+                },
+                "type": "object"
+            },
+            "CommentWithParentResource": {
+                "title": "CommentResource",
+                "description": "Ресурс комментария",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 101
+                    },
+                    "content": {
+                        "type": "string",
+                        "example": "Это комментарий к посту"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/UserResource"
+                    },
+                    "post": {
+                        "$ref": "#/components/schemas/PostOnlyResource"
+                    },
+                    "parent": {
+                        "$ref": "#/components/schemas/CommentOnlyResource"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-05-04T14:00:00Z"
+                    }
+                },
+                "type": "object"
+            },
+            "PostOnlyResource": {
+                "title": "PostOnlyResource",
+                "description": "Пост без связей",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 6
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Обновлённый заголовок"
+                    },
+                    "content": {
+                        "type": "string",
+                        "example": "Обновлённое содержимое поста."
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-05-09T09:16:11.000000Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-05-09T11:24:08.000000Z"
+                    }
+                },
+                "type": "object"
+            },
+            "PostPaginatedResource": {
+                "title": "PostPaginatedResource",
+                "description": "Пагинированный список постов",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/PostResource"
+                        }
+                    },
+                    "links": {
+                        "properties": {
+                            "first": {
+                                "type": "string",
+                                "example": "http://127.0.0.1:8000/api/v1/users/25/posts?page=1"
+                            },
+                            "last": {
+                                "type": "string",
+                                "example": "http://127.0.0.1:8000/api/v1/users/25/posts?page=1"
+                            },
+                            "prev": {
+                                "type": "string",
+                                "example": null,
+                                "nullable": true
+                            },
+                            "next": {
+                                "type": "string",
+                                "example": null,
+                                "nullable": true
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "meta": {
+                        "properties": {
+                            "current_page": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "from": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "last_page": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "path": {
+                                "type": "string",
+                                "example": "http://127.0.0.1:8000/api/v1/users/25/posts"
+                            },
+                            "per_page": {
+                                "type": "integer",
+                                "example": 25
+                            },
+                            "to": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "total": {
+                                "type": "integer",
+                                "example": 1
+                            }
+                        },
+                        "type": "object"
                     }
                 },
                 "type": "object"
@@ -1210,6 +1468,38 @@
                         "items": {
                             "$ref": "#/components/schemas/CommentResource"
                         }
+                    }
+                },
+                "type": "object"
+            },
+            "PostWithUserResource": {
+                "title": "PostWithUserResource",
+                "description": "Пост без связей",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 6
+                    },
+                    "title": {
+                        "type": "string",
+                        "example": "Обновлённый заголовок"
+                    },
+                    "content": {
+                        "type": "string",
+                        "example": "Обновлённое содержимое поста."
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-05-09T09:16:11.000000Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-05-09T11:24:08.000000Z"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/UserResource"
                     }
                 },
                 "type": "object"

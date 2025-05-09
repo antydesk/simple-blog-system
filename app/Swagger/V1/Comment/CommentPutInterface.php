@@ -20,7 +20,13 @@ namespace App\Swagger\V1\Comment;
  *     @OA\Response(
  *         response=200,
  *         description="Комментарий успешно обновлен",
- *         @OA\JsonContent(ref="#/components/schemas/CommentResource")
+ *         @OA\JsonContent(
+ *               type="object",
+ *               @OA\Property(
+ *                    property="data",
+ *                    ref="#/components/schemas/CommentOnlyResource"
+ *               )
+ *          )
  *     )
  * )
  */

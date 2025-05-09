@@ -15,6 +15,7 @@ use App\Repository\Api\V1\Write\Post\PostWriteRepositoryInterface;
 use App\Repository\Api\V1\Write\User\UserWriteRepository;
 use App\Repository\Api\V1\Write\User\UserWriteRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Passport\Passport;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -44,6 +45,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Passport::enablePasswordGrant();
     }
 }

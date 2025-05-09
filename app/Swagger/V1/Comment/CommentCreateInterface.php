@@ -34,7 +34,14 @@ namespace App\Swagger\V1\Comment;
  *
  *     @OA\Response(
  *         response=201,
- *         description="Комментарий успешно создан"
+ *         description="Комментарий успешно создан",
+ *         @OA\JsonContent(
+ *               type="object",
+ *               @OA\Property(
+ *                    property="data",
+ *                    ref="#/components/schemas/CommentWithParentResource"
+ *               )
+ *         )
  *     )
  * )
  */

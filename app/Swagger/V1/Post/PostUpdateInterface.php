@@ -31,7 +31,13 @@ namespace App\Swagger\V1\Post;
  *     @OA\Response(
  *         response=200,
  *         description="Пост обновлён",
- *         @OA\JsonContent(ref="#/components/schemas/PostResource")
+ *         @OA\JsonContent(
+ *              type="object",
+ *              @OA\Property(
+ *                   property="data",
+ *                   ref="#/components/schemas/PostOnlyResource"
+ *              )
+ *         )
  *     )
  * )
  */

@@ -2,9 +2,10 @@
 
 namespace App\Swagger\V1\Comment\Resources;
 
+
 /**
  * @OA\Schema(
- *     schema="CommentResource",
+ *     schema="CommentWithParentResource",
  *     title="CommentResource",
  *     description="Ресурс комментария",
  *     type="object",
@@ -27,6 +28,10 @@ namespace App\Swagger\V1\Comment\Resources;
  *         ref="#/components/schemas/PostOnlyResource"
  *     ),
  *     @OA\Property(
+ *         property="parent",
+ *         ref="#/components/schemas/CommentOnlyResource"
+ *     ),
+ *     @OA\Property(
  *         property="created_at",
  *         type="string",
  *         format="date-time",
@@ -34,6 +39,6 @@ namespace App\Swagger\V1\Comment\Resources;
  *     )
  * )
  */
-interface CommentResourceInterface
+interface CommentWithParentResourceInterface
 {
 }
