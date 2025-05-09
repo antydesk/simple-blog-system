@@ -17,7 +17,13 @@ namespace App\Swagger\V1\Comment;
  *     @OA\Response(
  *         response=200,
  *         description="Список комментариев",
- *         @OA\JsonContent(type="array", @OA\Items(ref="#/components/schemas/CommentResource"))
+ *         @OA\JsonContent(
+ *               type="object",
+ *               @OA\Property(
+ *                    property="data",
+ *                    ref="#/components/schemas/CommentPaginatedResource"
+ *               )
+ *          )
  *     )
  * )
  */

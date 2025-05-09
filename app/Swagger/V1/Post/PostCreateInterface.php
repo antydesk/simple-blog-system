@@ -25,7 +25,7 @@ namespace App\Swagger\V1\Post;
  *     @OA\Response(
  *         response=201,
  *         description="Пост успешно создан",
- *         @OA\JsonContent(ref="#/components/schemas/PostResource")
+ *         @OA\JsonContent(ref="#/components/schemas/PostOnlyResource")
  *     )
  * )
  */

@@ -14,6 +14,14 @@ class CommentCreateAction
 
     public function run(CommentCreateDto $commentCreateDto): Comment
     {
-        return $this->commentWriteRepository->create($commentCreateDto);
+        $comment = $this->commentWriteRepository->create($commentCreateDto);
+
+        $relations = ['post', 'user'];
+
+        if($commentCreateDto->parent_id){
+            $relations[] = 'parent';
+        }
+
+        return $comment->load($relations);
     }
 }

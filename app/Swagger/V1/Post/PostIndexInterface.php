@@ -23,10 +23,7 @@ namespace App\Swagger\V1\Post;
  *     @OA\Response(
  *         response=200,
  *         description="Успешный ответ. Список постов пользователя.",
- *          @OA\JsonContent(
- *              type="array",
- *              @OA\Items(ref="#/components/schemas/PostResource")
- *          )
+ *          @OA\JsonContent(ref="#/components/schemas/PostPaginatedResource")
  *     ),
  *     @OA\Response(
  *         response=401,

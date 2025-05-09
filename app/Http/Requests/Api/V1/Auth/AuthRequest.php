@@ -1,19 +1,14 @@
 <?php
 
-namespace App\Http\Requests\Api\V1\Login;
+namespace App\Http\Requests\Api\V1\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserLoginRequest extends FormRequest
+class AuthRequest extends FormRequest
 {
-    public const string EMAIL = 'email';
+    public const string EMAIL    = 'email';
     public const string PASSWORD = 'password';
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
@@ -21,18 +16,17 @@ class UserLoginRequest extends FormRequest
                 'required',
                 'string',
                 'email',
+                'unique:users',
             ],
             self::PASSWORD => [
                 'required',
-                'confirmed',
                 'string',
-                'min:8',
+                'between:5,255',
             ]
         ];
     }
 
-
-    public function getEmail(): string
+    public function getUsername(): string
     {
         return $this->get(self::EMAIL);
     }
@@ -42,4 +36,8 @@ class UserLoginRequest extends FormRequest
         return $this->get(self::PASSWORD);
     }
 
+    public function getIp(): ?string
+    {
+        return $this->header('X-Forwarded-For');
+    }
 }
