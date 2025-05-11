@@ -53,10 +53,14 @@ class AuthController extends Controller
     public function register(
         RegisterRequest $request,
         RegisterAction $registerAction
-    ): CredentialResource {
+    ): JsonResponse {
         $dto = UserRegisterDto::fromRequest($request);
 
-        return $registerAction->run($dto);
+        $data = $registerAction->run($dto);
+
+        return new CredentialResource($data)
+            ->response()
+            ->setStatusCode(ResponseAlias::HTTP_CREATED);
     }
 
     /**

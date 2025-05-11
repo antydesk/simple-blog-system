@@ -22,7 +22,7 @@ class RegisterRequest extends FormRequest
                 'required',
                 'string',
                 'email',
-                'unique:users',
+                'unique:users,email',
             ],
             self::PASSWORD => [
                 'required',
