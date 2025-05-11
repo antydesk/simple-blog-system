@@ -26,7 +26,7 @@ class RegisterAction
      * @throws AuthenticationException
      * @throws OAuthServerException
      */
-    public function run(UserRegisterDto $dto): CredentialResource
+    public function run(UserRegisterDto $dto): array
     {
         $this->userWriteRepository->create($dto);
 
@@ -35,8 +35,6 @@ class RegisterAction
         $userLoginDto->email = $dto->email;
         $userLoginDto->password = $dto->password;
 
-        $result = $this->loginAction->run($userLoginDto);
-
-        return new CredentialResource($result);
+        return $this->loginAction->run($userLoginDto);
     }
 }

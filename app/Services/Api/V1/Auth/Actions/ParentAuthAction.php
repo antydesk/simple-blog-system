@@ -50,7 +50,6 @@ class ParentAuthAction
         $oClientId = Config::get('passport.personal_access_client.id');
         $this->client = Client::where('id', $oClientId)
             ->first();
-
     }
 
     protected function getClientCredentials(array $data): void
@@ -58,12 +57,11 @@ class ParentAuthAction
         $oClientId = Config::get('passport.client_credentials_client.id');
         $secret = Config::get('passport.client_credentials_client.secret');
 
-        if($data['client_secret'] !== $secret || $data['client_id'] !== $oClientId) {
+        if ($data['client_secret'] !== $secret || $data['client_id'] !== $oClientId) {
             throw new AuthenticationException();
         }
 
-        $this->client = Client::where('id', $data['client_id'] )->first();
-
+        $this->client = Client::where('id', $data['client_id'])->first();
     }
 
     /**
