@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('v1')->group(function () {
-    Route::middleware('auth:api')->group(function () {
+    Route::middleware(['api','auth:api','ensure.user.self'])->group(function () {
         Route::prefix('users')->group(function () {
             Route::get('/{user_id}', [UserController::class, 'show']);
             Route::put('/{user_id}', [UserController::class, 'update']);

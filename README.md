@@ -67,12 +67,27 @@ RESTful API, разработанный с использованием **Larave
    php artisan passport:install
    ```
 
-7. Добавьте в `.env`:
+7. Добавьте в `.env`: (Используйте пункт 2 в секции Laravel Passport для создания отдельного клиента для Password Grant:)
    ```env
    PASSPORT_PERSONAL_ACCESS_CLIENT_ID=client-id
    PASSPORT_PERSONAL_ACCESS_CLIENT_SECRET=client-secret
    ```
+# Laravel Passport
 
+1. Создать ключи шифрования и стандартных клиентов:
+ ```bash
+    php artisan passport:key
+```
+
+2. Создать отдельного клиента для Password Grant:
+ ```bash
+    php artisan passport:client --password
+```
+
+3. Создать клиента для Personal Access Token:
+ ```bash
+    php artisan passport:client --personal
+```
 ---
 
 ## 📚 API Маршруты
