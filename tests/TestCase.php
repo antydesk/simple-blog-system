@@ -14,17 +14,17 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
 
-        // Создаём password grant client
-        Artisan::call('passport:client', [
-            '--password' => true,
-            '--name' => 'Test Password Client',
-            '--no-interaction' => true,
-        ]);
+        $client = Client::query()->where('name', 'Test Password Client')->first();
 
-        // Получаем только password grant client
-        $client = \Laravel\Passport\Client::query()->latest()->first();
+        if (!$client) {
+            Artisan::call('passport:client', [
+                '--password' => true,
+                '--name' => 'Test Password Client',
+                '--no-interaction' => true,
+            ]);
+            $client = Client::query()->where('name', 'Test Password Client')->first();
+        }
 
-        // Устанавливаем в конфиг, чтобы код из getPassportCredentials мог его получить
         Config::set('passport.personal_access_client.id', $client->id);
         Config::set('passport.personal_access_client.secret', $client->secret);
     }

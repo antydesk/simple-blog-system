@@ -3,14 +3,14 @@
 namespace Tests\Feature\Auth;
 
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 
 class GetMeTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     */
+    use RefreshDatabase;
+
     public function test_me_authenticated(): void
     {
         $user = User::factory()->create();

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\EnsureUserIsSelf;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -26,26 +27,26 @@ return Application::configure(basePath: dirname(__DIR__))
         },
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->alias(['ensure.user.self' => EnsureUserIsSelf::class]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        $exceptions->renderable(function (Throwable $e, $request) {
-            if ($e instanceof AuthenticationException) {
-                return response()->json([
-                    'message' => 'Unauthenticated.',
-                ], 401);
-            }
-
-            if ($e instanceof ValidationException) {
-                return response()->json([
-                    'message' => 'Validation failed.',
-                    'errors' => $e->errors(),
-                ], 422);
-            }
-
-            return response()->json([
-                'message' => $e->getMessage(),
-            ], 500);
-        });
+//        $exceptions->renderable(function (Throwable $e, $request) {
+//            if ($e instanceof AuthenticationException) {
+//                return response()->json([
+//                    'message' => 'Unauthenticated.',
+//                ], 401);
+//            }
+//
+//            if ($e instanceof ValidationException) {
+//                return response()->json([
+//                    'message' => 'Validation failed.',
+//                    'errors' => $e->errors(),
+//                ], 422);
+//            }
+//
+//            return response()->json([
+//                'message' => $e->getMessage(),
+//            ], 500);
+//        });
     })
     ->create();
