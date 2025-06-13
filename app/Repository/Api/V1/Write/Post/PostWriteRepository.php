@@ -30,14 +30,28 @@ class PostWriteRepository implements PostWriteRepositoryInterface
         ]);
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function update(PostUpdateDto $postUpdateDto): Post
     {
-        $this->query()->where('id', $postUpdateDto->id)->update([
+
+        $post = $this->query()->where('id', $postUpdateDto->id)->first();
+
+        if (!Gate::allows('update', $post)) {
+            throw new AuthorizationException('You are not allowed to delete this post.');
+        }
+
+        if(!$post){
+            throw new NotFoundHttpException('Post not found.');
+        }
+
+        $post->update([
             'content' => $postUpdateDto->content,
             'title' => $postUpdateDto->title,
         ]);
 
-        return $this->query()->where('id', $postUpdateDto->id)->first();
+        return $post;
     }
 
     /**

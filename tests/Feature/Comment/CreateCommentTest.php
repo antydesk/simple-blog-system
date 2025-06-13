@@ -69,20 +69,6 @@ class CreateCommentTest extends TestCase
 
     }
 
-//    public function test_create_comment_unauthenticated(): void
-//    {
-//        $user = User::factory()->create();
-//        $post = Post::factory()->create([
-//            'user_id' => $user->id,
-//        ]);
-//
-//        $response = $this->postJson("/api/v1/user/{$user->id}/posts/{$post->id}/comments", [
-//            'content' => 'Test comment',
-//        ]);
-//
-//        $response->assertUnauthorized();
-//    }
-
     public function test_create_comment_missing_content(): void
     {
         $user = User::factory()->create();

@@ -119,37 +119,40 @@ class UpdatePostTest extends TestCase
             ->assertJsonValidationErrors(['content']);
     }
 
-//    public function test_update_post_not_owned_by_user(): void
-//    {
-//        $user = User::factory()->create();
-//        $otherUser = User::factory()->create();
-//
-//        Passport::actingAs($user);
-//
-//        $post = Post::factory()->create(['user_id' => $otherUser->id]);
-//
-//        $response = $this->putJson("/api/v1/users/{$user->id}/posts/{$post->id}", [
-//            'title' => 'New Title',
-//            'content' => 'New content',
-//        ]);
-//
-//        $response->assertForbidden();
-//    }
-//
-//    public function test_update_post_with_invalid_user_id(): void
-//    {
-//        $user = User::factory()->create();
-//        Passport::actingAs($user);
-//
-//        $post = Post::factory()->create(['user_id' => $user->id]);
-//
-//        $invalidUserId = $user->id + 100;
-//
-//        $response = $this->putJson("/api/v1/users/{$invalidUserId}/posts/{$post->id}", [
-//            'title' => 'Valid Title',
-//            'content' => 'Valid content',
-//        ]);
-//
-//        $response->assertForbidden();
-//    }
+    public function test_update_post_not_owned_by_user(): void
+    {
+        $user = User::factory()->create();
+        $otherUser = User::factory()->create();
+
+        Passport::actingAs($user);
+
+        $post = Post::factory()->create(['user_id' => $otherUser->id]);
+
+        $response = $this->putJson("/api/v1/users/{$user->id}/posts/{$post->id}", [
+            'title' => 'New Title',
+            'content' => 'New content',
+        ]);
+
+        $response->assertForbidden()
+        ->assertJson([
+            'message' => 'You are not allowed to delete this post.'
+        ]);
+    }
+
+    public function test_update_post_with_invalid_user_id(): void
+    {
+        $user = User::factory()->create();
+        Passport::actingAs($user);
+
+        $post = Post::factory()->create(['user_id' => $user->id]);
+
+        $invalidUserId = $user->id + 100;
+
+        $response = $this->putJson("/api/v1/users/{$invalidUserId}/posts/{$post->id}", [
+            'title' => 'Valid Title',
+            'content' => 'Valid content',
+        ]);
+
+        $response->assertForbidden();
+    }
 }
