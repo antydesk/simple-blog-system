@@ -131,6 +131,21 @@ RESTful API, разработанный с использованием **Larave
 | DELETE | `/api/v1/users/{user_id}/posts/{post_id}/comments/{comment_id}`          |
 | GET    | `/api/v1/users/{user_id}/posts/{post_id}/comments/{comment_id}/children` |
 
+
+## Лайки на посты (вложенные маршруты `/posts/{post_id}/likes`)
+
+| Метод | URI                                                  |
+|--------|------------------------------------------------------|
+| POST   | `/api/v1/users/{user_id}/posts/{post_id}/likes`     |
+| GET    | `/api/v1/users/{user_id}/posts/{post_id}/likes`     |
+
+## Лайки на комментарии (вложенные маршруты `/comments/{comment_id}/likes`)
+
+| Метод | URI                                                                 |
+|--------|----------------------------------------------------------------------|
+| POST   | `/api/v1/users/{user_id}/posts/{post_id}/comments/{comment_id}/likes` |
+| GET    | `/api/v1/users/{user_id}/posts/{post_id}/comments/{comment_id}/likes` |
+
 ---
 
 ## 🚀 Запуск проекта
