@@ -4,12 +4,16 @@ namespace App\Providers;
 
 use App\Repository\Api\V1\Read\Comment\CommentReadRepository;
 use App\Repository\Api\V1\Read\Comment\CommentReadRepositoryInterface;
+use App\Repository\Api\V1\Read\Like\LikeReadRepository;
+use App\Repository\Api\V1\Read\Like\LikeReadRepositoryInterface;
 use App\Repository\Api\V1\Read\Post\PostReadRepository;
 use App\Repository\Api\V1\Read\Post\PostReadRepositoryInterface;
 use App\Repository\Api\V1\Read\User\UserReadRepository;
 use App\Repository\Api\V1\Read\User\UserReadRepositoryInterface;
 use App\Repository\Api\V1\Write\Comment\CommentWriteRepository;
 use App\Repository\Api\V1\Write\Comment\CommentWriteRepositoryInterface;
+use App\Repository\Api\V1\Write\Like\LikeWriteRepository;
+use App\Repository\Api\V1\Write\Like\LikeWriteRepositoryInterface;
 use App\Repository\Api\V1\Write\Post\PostWriteRepository;
 use App\Repository\Api\V1\Write\Post\PostWriteRepositoryInterface;
 use App\Repository\Api\V1\Write\User\UserWriteRepository;
@@ -30,6 +34,9 @@ class AppServiceProvider extends ServiceProvider
 
         CommentWriteRepositoryInterface::class => CommentWriteRepository::class,
         CommentReadRepositoryInterface::class => CommentReadRepository::class,
+
+        LikeWriteRepositoryInterface::class => LikeWriteRepository::class,
+        LikeReadRepositoryInterface::class => LikeReadRepository::class,
     ];
 
     /**
