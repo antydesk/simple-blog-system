@@ -19,7 +19,7 @@ class PostIndexAction
             perPage: $postListDto->perPage,
             page: $postListDto->page,
             q: $postListDto->q,
-            relations: ['user','comments']
+            relations: ['user','comments','likes'],
         );
     }
 }
