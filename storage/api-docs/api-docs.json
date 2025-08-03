@@ -619,6 +619,218 @@
                 ]
             }
         },
+        "/api/v1/users/{user_id}/posts/{post_id}/comments/{comment_id}/likes": {
+            "get": {
+                "tags": [
+                    "Like"
+                ],
+                "summary": "Получить список лайков коммента",
+                "description": "Возвращает список всех лайков, принадлежащих указанному комменту",
+                "operationId": "getCommentLikes",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "ID пользователя, которому принадлежит пост",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "post_id",
+                        "in": "path",
+                        "description": "ID поста",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 42
+                        }
+                    },
+                    {
+                        "name": "comment_id",
+                        "in": "path",
+                        "description": "ID коммента",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 10
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Успешный ответ. Список лайков коммента.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CommentResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Like"
+                ],
+                "summary": "Создание лайка коммента",
+                "description": "Позволяет поставить лайк указанному комменту от имени авторизованного пользователя",
+                "operationId": "createCommentLike",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "ID пользователя, которому принадлежит пост",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "post_id",
+                        "in": "path",
+                        "description": "ID поста",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 42
+                        }
+                    },
+                    {
+                        "name": "comment_id",
+                        "in": "path",
+                        "description": "ID коммента",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 10
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Лайк успешно создан",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LikeCommentResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/v1/users/{user_id}/posts/{post_id}/likes": {
+            "get": {
+                "tags": [
+                    "Like"
+                ],
+                "summary": "Получить список лайков поста",
+                "description": "Возвращает список всех лайков, принадлежащих указанному посту",
+                "operationId": "getPostLikes",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "ID пользователя, которому принадлежит пост",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "post_id",
+                        "in": "path",
+                        "description": "ID поста",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 42
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Успешный ответ. Список лайков поста.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LikePostResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Like"
+                ],
+                "summary": "Создание лайка поста",
+                "description": "Позволяет поставить лайк указанному посту от имени авторизованного пользователя",
+                "operationId": "createPostLike",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "description": "ID пользователя, которому принадлежит пост",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    },
+                    {
+                        "name": "post_id",
+                        "in": "path",
+                        "description": "ID поста",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 42
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Лайк успешно создан",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LikePostResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/v1/users/{user_id}/posts": {
             "get": {
                 "tags": [
@@ -1299,6 +1511,12 @@
                     "post": {
                         "$ref": "#/components/schemas/PostOnlyResource"
                     },
+                    "likes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/LikeCommentResource"
+                        }
+                    },
                     "created_at": {
                         "type": "string",
                         "format": "date-time",
@@ -1332,6 +1550,60 @@
                         "type": "string",
                         "format": "date-time",
                         "example": "2025-05-04T14:00:00Z"
+                    }
+                },
+                "type": "object"
+            },
+            "LikeCommentResource": {
+                "title": "LikeCommentResource",
+                "description": "Ресурс Лайка для постов",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-05-04T12:34:56Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-05-04T12:34:56Z"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/UserResource"
+                    },
+                    "likeable": {
+                        "$ref": "#/components/schemas/CommentResource"
+                    }
+                },
+                "type": "object"
+            },
+            "LikePostResource": {
+                "title": "LikePostResource",
+                "description": "Ресурс Лайка для постов",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-05-04T12:34:56Z"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2025-05-04T12:34:56Z"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/UserResource"
+                    },
+                    "likeable": {
+                        "$ref": "#/components/schemas/PostOnlyResource"
                     }
                 },
                 "type": "object"
@@ -1468,6 +1740,12 @@
                         "items": {
                             "$ref": "#/components/schemas/CommentResource"
                         }
+                    },
+                    "likes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/LikePostResource"
+                        }
                     }
                 },
                 "type": "object"
@@ -1541,6 +1819,10 @@
         {
             "name": "Comment",
             "description": "Comment"
+        },
+        {
+            "name": "Like",
+            "description": "Like"
         },
         {
             "name": "Post",

@@ -27,6 +27,11 @@ namespace App\Swagger\V1\Comment\Resources;
  *         ref="#/components/schemas/PostOnlyResource"
  *     ),
  *     @OA\Property(
+ *          property="likes",
+ *          type="array",
+ *          @OA\Items(ref="#/components/schemas/LikeCommentResource")
+ *      ),
+ *     @OA\Property(
  *         property="created_at",
  *         type="string",
  *         format="date-time",

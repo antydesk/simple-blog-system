@@ -43,6 +43,11 @@ namespace App\Swagger\V1\Post\Resources;
  *         property="comments",
  *         type="array",
  *         @OA\Items(ref="#/components/schemas/CommentResource")
+ *     ),
+ *     @OA\Property(
+ *         property="likes",
+ *         type="array",
+ *         @OA\Items(ref="#/components/schemas/LikePostResource")
  *     )
  * )
  */

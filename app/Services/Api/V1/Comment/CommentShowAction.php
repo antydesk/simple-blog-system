@@ -14,6 +14,6 @@ class CommentShowAction
 
     public function run(CommentShowDto $commentShowDto): Comment
     {
-        return $this->commentReadRepository->getById($commentShowDto->id, ['post', 'user']);
+        return $this->commentReadRepository->getById($commentShowDto->id, ['post', 'user','likes']);
     }
 }
