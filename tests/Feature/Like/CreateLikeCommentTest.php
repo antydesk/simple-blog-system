@@ -19,7 +19,7 @@ class CreateLikeCommentTest extends TestCase
         Passport::actingAs($user);
 
         $post = Post::factory()->create(['user_id' => $user->id]);
-        $comment = Comment::factory()->create(['user_id' => $user->id,'post_id' => $post->id]);
+        $comment = Comment::factory()->create(['user_id' => $user->id, 'post_id' => $post->id]);
 
         $response = $this->postJson("/api/v1/users/$user->id/posts/$post->id/comments/$comment->id/likes");
 
@@ -31,7 +31,7 @@ class CreateLikeCommentTest extends TestCase
                     'likeable',
                     'created_at',
                     'updated_at',
-                ]
+                ],
             ]);
 
         $this->assertDatabaseHas('likes', [
@@ -40,6 +40,4 @@ class CreateLikeCommentTest extends TestCase
             'likeable_type' => Comment::class,
         ]);
     }
-
-
 }

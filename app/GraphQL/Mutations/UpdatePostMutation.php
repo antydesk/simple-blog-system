@@ -31,8 +31,8 @@ class UpdatePostMutation extends Mutation
         $root,
         array $args,
         $ctx,
-        ResolveInfo|null $resolveInfo = null,
-        Closure|null $getSelectFields = null
+        ?ResolveInfo $resolveInfo = null,
+        ?Closure $getSelectFields = null
     ): bool {
         return Auth::check(); // Passport: требуется Bearer токен
     }
@@ -52,7 +52,7 @@ class UpdatePostMutation extends Mutation
         abort_unless($post->user_id === Auth::id(), 403, 'Forbidden');
 
         $post->fill($args['input'] ?? [])->save();
+
         return $post->fresh();
     }
 }
-

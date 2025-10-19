@@ -8,9 +8,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class CommentChildrenIndexAction
 {
-    public function __construct(protected CommentReadRepositoryInterface $commentReadRepository)
-    {
-    }
+    public function __construct(protected CommentReadRepositoryInterface $commentReadRepository) {}
 
     public function run(CommentChildrenListDto $commentListDto): LengthAwarePaginator
     {

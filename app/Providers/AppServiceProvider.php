@@ -23,14 +23,12 @@ use Laravel\Passport\Passport;
 
 class AppServiceProvider extends ServiceProvider
 {
-
     public $bindings = [
         UserReadRepositoryInterface::class => UserReadRepository::class,
         UserWriteRepositoryInterface::class => UserWriteRepository::class,
 
         PostWriteRepositoryInterface::class => PostWriteRepository::class,
         PostReadRepositoryInterface::class => PostReadRepository::class,
-
 
         CommentWriteRepositoryInterface::class => CommentWriteRepository::class,
         CommentReadRepositoryInterface::class => CommentReadRepository::class,

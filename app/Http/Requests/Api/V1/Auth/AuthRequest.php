@@ -6,7 +6,8 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class AuthRequest extends FormRequest
 {
-    public const string EMAIL    = 'email';
+    public const string EMAIL = 'email';
+
     public const string PASSWORD = 'password';
 
     public function rules(): array
@@ -22,7 +23,7 @@ class AuthRequest extends FormRequest
                 'required',
                 'string',
                 'between:5,255',
-            ]
+            ],
         ];
     }
 

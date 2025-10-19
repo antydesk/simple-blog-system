@@ -2,7 +2,6 @@
 
 namespace App\Repository\Api\V1\Write\Comment;
 
-
 use App\Dto\Api\V1\Comment\CommentCreateDto;
 use App\Dto\Api\V1\Comment\CommentUpdateDto;
 use App\Models\Comment;
@@ -22,6 +21,7 @@ class CommentWriteRepository implements CommentWriteRepositoryInterface
 
     public function update(CommentUpdateDto $commentUpdateDto): Comment
     {
+        /** @var Comment $comment */
         $comment = $this->query()->findOrFail($commentUpdateDto->id);
 
         $comment->update([
@@ -37,12 +37,15 @@ class CommentWriteRepository implements CommentWriteRepositoryInterface
     public function destroy(int $comment_id): bool
     {
         $comment = $this->query()->findOrFail($comment_id);
+
         return $comment->delete();
     }
 
+    /**
+     * @return Builder<Comment>
+     */
     protected function query(): Builder
     {
         return Comment::query();
     }
 }
-

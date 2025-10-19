@@ -2,13 +2,13 @@
 
 namespace App\Swagger\V1\Post\Resources;
 
-
 /**
  * @OA\Schema(
  *     schema="PostWithUserResource",
  *     title="PostWithUserResource",
  *     description="Пост без связей",
  *     type="object",
+ *
  *     @OA\Property(property="id", type="integer", example=6),
  *     @OA\Property(property="title", type="string", example="Обновлённый заголовок"),
  *     @OA\Property(property="content", type="string", example="Обновлённое содержимое поста."),
@@ -20,7 +20,4 @@ namespace App\Swagger\V1\Post\Resources;
  *     )
  * )
  */
-interface PostWithUserResourceInterface
-{
-}
-
+interface PostWithUserResourceInterface {}

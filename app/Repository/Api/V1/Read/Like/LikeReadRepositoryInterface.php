@@ -8,4 +8,5 @@ interface LikeReadRepositoryInterface
 {
     public function getByPostId(int $postId): Collection;
 
+    public function getByCommentId(int $commentId): Collection;
 }

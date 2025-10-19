@@ -34,7 +34,7 @@ class ShowCommentTest extends TestCase
                     'content',
                     'created_at',
                     'updated_at',
-                ]
+                ],
             ])
             ->assertJsonFragment([
                 'id' => $comment->id,
@@ -85,5 +85,4 @@ class ShowCommentTest extends TestCase
 
         $response->assertUnauthorized();
     }
-
 }

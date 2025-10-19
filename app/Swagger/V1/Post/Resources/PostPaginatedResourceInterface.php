@@ -8,11 +8,14 @@ namespace App\Swagger\V1\Post\Resources;
  *     title="PostPaginatedResource",
  *     description="Пагинированный список постов",
  *     type="object",
+ *
  *     @OA\Property(
  *         property="data",
  *         type="array",
+ *
  *         @OA\Items(ref="#/components/schemas/PostResource")
  *     ),
+ *
  *     @OA\Property(
  *         property="links",
  *         type="object",
@@ -34,7 +37,4 @@ namespace App\Swagger\V1\Post\Resources;
  *     )
  * )
  */
-interface PostPaginatedResourceInterface
-{
-}
-
+interface PostPaginatedResourceInterface {}

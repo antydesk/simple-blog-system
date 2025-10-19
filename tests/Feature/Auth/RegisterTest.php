@@ -26,11 +26,11 @@ class RegisterTest extends TestCase
 
         $response->assertJsonStructure([
             'data' => [
-                "access_token",
-                "refresh_token",
-                "token_type",
-                "expires_in"
-            ]
+                'access_token',
+                'refresh_token',
+                'token_type',
+                'expires_in',
+            ],
         ]);
     }
 
@@ -41,7 +41,6 @@ class RegisterTest extends TestCase
         $response->assertUnprocessable();
         $response->assertJsonValidationErrors(['name', 'email', 'password']);
     }
-
 
     public function test_register_fails_with_invalid_email(): void
     {

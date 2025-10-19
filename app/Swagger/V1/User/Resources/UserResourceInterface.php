@@ -8,6 +8,7 @@ namespace App\Swagger\V1\User\Resources;
  *     title="UserResource",
  *     description="Ресурс пользователя",
  *     type="object",
+ *
  *     @OA\Property(
  *         property="id",
  *         type="integer",
@@ -25,6 +26,4 @@ namespace App\Swagger\V1\User\Resources;
  *     )
  * )
  */
-interface UserResourceInterface
-{
-}
+interface UserResourceInterface {}

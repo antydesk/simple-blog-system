@@ -13,23 +13,21 @@ class LikeReadRepository implements LikeReadRepositoryInterface
     public function getByPostId(int $postId): Collection
     {
         return $this->query()
-            ->where("likeable_id", $postId)
-            ->where("likeable_type", Post::class)
+            ->where('likeable_id', $postId)
+            ->where('likeable_type', Post::class)
             ->get();
     }
 
     public function getByCommentId(int $commentId): Collection
     {
         return $this->query()
-            ->where("likeable_id", $commentId)
-            ->where("likeable_type", Comment::class)
+            ->where('likeable_id', $commentId)
+            ->where('likeable_type', Comment::class)
             ->get();
     }
-
 
     public function query(): Builder
     {
         return Like::query();
     }
-
 }

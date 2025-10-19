@@ -44,4 +44,3 @@ class CommentsByPostQuery extends Query
             ->get();
     }
 }
-

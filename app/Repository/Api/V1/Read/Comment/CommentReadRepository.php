@@ -9,16 +9,16 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class CommentReadRepository implements CommentReadRepositoryInterface
 {
-
     public function getById(int $id, array $relations = []): Comment
     {
+        /** @var ?Comment $comment */
         $comment = $this->query()
             ->where('id', $id)
             ->with($relations)
             ->first();
 
         if (is_null($comment)) {
-            throw new ModelNotFoundException(); // TODO create PostNotFoundException
+            throw new ModelNotFoundException; // TODO create PostNotFoundException
         }
 
         return $comment;
@@ -43,7 +43,7 @@ class CommentReadRepository implements CommentReadRepositoryInterface
             ->where('post_id', $postId)
             ->with($relations);
 
-        if (!is_null($parentId)) {
+        if (! is_null($parentId)) {
             $query->where('parent_id', $parentId);
         }
 

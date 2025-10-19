@@ -9,13 +9,13 @@ use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Gate;
-use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
 
 class PostWriteRepository implements PostWriteRepositoryInterface
 {
-
+    /**
+     * @return Builder<Post>
+     */
     protected function query(): Builder
     {
         return Post::query();
@@ -32,18 +32,19 @@ class PostWriteRepository implements PostWriteRepositoryInterface
 
     /**
      * @throws AuthorizationException
+     * @throws NotFoundHttpException
      */
     public function update(PostUpdateDto $postUpdateDto): Post
     {
-
+        /** @var Post|null $post */
         $post = $this->query()->where('id', $postUpdateDto->id)->first();
 
-        if (!Gate::allows('update', $post)) {
-            throw new AuthorizationException('You are not allowed to delete this post.');
+        if (! $post) {
+            throw new NotFoundHttpException('Post not found.');
         }
 
-        if(!$post){
-            throw new NotFoundHttpException('Post not found.');
+        if (! Gate::allows('update', $post)) {
+            throw new AuthorizationException('You are not allowed to update this post.');
         }
 
         $post->update([
@@ -61,15 +62,14 @@ class PostWriteRepository implements PostWriteRepositoryInterface
     {
         $post = $this->query()->where('id', $post_id)->first();
 
-        if (!$post) {
-            throw new NotFoundHttpException('Post not found');
+        if (! $post) {
+            throw new NotFoundHttpException('Post not found.');
         }
 
-        if (!Gate::allows('delete', $post)) {
+        if (! Gate::allows('delete', $post)) {
             throw new AuthorizationException('You are not allowed to delete this post.');
         }
 
         return $post->delete();
     }
-
 }

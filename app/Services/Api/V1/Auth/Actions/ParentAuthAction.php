@@ -23,45 +23,55 @@ class ParentAuthAction
     use HandlesOAuthErrors;
 
     protected User $user;
-    protected array $tokenData;
-    protected readonly Client $client;
+
+    protected array $tokenData = [];
+
+    protected ?Client $client = null; // ✅ исправлено: может быть null и не readonly
+
     protected UserLoginDto $dto;
+
     protected ServerRequestInterface $serverRequest;
 
     public function __construct(
         protected readonly AuthorizationServer $server,
         protected readonly UserReadRepositoryInterface $userReadRepository,
         protected readonly UserWriteRepositoryInterface $userWriteRepository,
-    ) {
-    }
+    ) {}
 
     protected function createServerRequest(): void
     {
         $this->serverRequest = (new PsrHttpFactory(
-            new Psr17Factory(),
-            new Psr17Factory(),
-            new Psr17Factory(),
-            new Psr17Factory()
+            new Psr17Factory,
+            new Psr17Factory,
+            new Psr17Factory,
+            new Psr17Factory
         ))->createRequest(request());
     }
 
     protected function getPassportCredentials(): void
     {
         $oClientId = Config::get('passport.personal_access_client.id');
-        $this->client = Client::where('id', $oClientId)
+
+        $this->client = Client::query()
+            ->where('id', $oClientId)
             ->first();
     }
 
+    /**
+     * @throws AuthenticationException
+     */
     protected function getClientCredentials(array $data): void
     {
         $oClientId = Config::get('passport.client_credentials_client.id');
         $secret = Config::get('passport.client_credentials_client.secret');
 
         if ($data['client_secret'] !== $secret || $data['client_id'] !== $oClientId) {
-            throw new AuthenticationException();
+            throw new AuthenticationException;
         }
 
-        $this->client = Client::where('id', $data['client_id'])->first();
+        $this->client = Client::query()
+            ->where('id', $data['client_id'])
+            ->first();
     }
 
     /**
@@ -69,7 +79,7 @@ class ParentAuthAction
      */
     protected function withParsedBodyToServerRequest(): void
     {
-        if (isset($this->client->id) && isset($this->client->secret)) {
+        if ($this->client && $this->client->id && $this->client->secret) {
             $this->serverRequest = $this->serverRequest->withParsedBody([
                 'grant_type' => 'password',
                 'username' => $this->dto->email,
@@ -79,17 +89,16 @@ class ParentAuthAction
                 'scope' => '*',
             ]);
         } else {
-            throw new AuthenticationException();
+            throw new AuthenticationException;
         }
     }
 
     /**
-     * Новый метод для client_credentials
      * @throws AuthenticationException
      */
     protected function withParsedBodyToServerRequestForClientCredentials(): void
     {
-        if (isset($this->client->id) && isset($this->client->secret)) {
+        if ($this->client && $this->client->id && $this->client->secret) {
             $this->serverRequest = $this->serverRequest->withParsedBody([
                 'grant_type' => 'client_credentials',
                 'client_id' => $this->client->id,
@@ -97,7 +106,7 @@ class ParentAuthAction
                 'scope' => 'report',
             ]);
         } else {
-            throw new AuthenticationException();
+            throw new AuthenticationException;
         }
     }
 
@@ -106,7 +115,7 @@ class ParentAuthAction
      */
     protected function withParsedBodyToServerRequestForRefreshToken(string $refreshToken): void
     {
-        if (isset($this->client->id) && isset($this->client->secret)) {
+        if ($this->client && $this->client->id && $this->client->secret) {
             $this->serverRequest = $this->serverRequest->withParsedBody([
                 'grant_type' => 'refresh_token',
                 'client_id' => $this->client->id,
@@ -115,7 +124,7 @@ class ParentAuthAction
                 'scope' => '*',
             ]);
         } else {
-            throw new AuthenticationException();
+            throw new AuthenticationException;
         }
     }
 
@@ -126,6 +135,7 @@ class ParentAuthAction
     protected function createAuthenticationToken(): void
     {
         $serverRequest = $this->serverRequest;
+
         $response = $this->withErrorHandling(function () use ($serverRequest) {
             return $this->convertResponse(
                 $this->server->respondToAccessTokenRequest($serverRequest, new Psr7Response)
@@ -135,7 +145,7 @@ class ParentAuthAction
         $this->tokenData = json_decode($response->getContent(), true) ?? [];
 
         if (empty($this->tokenData)) {
-            throw new AuthorizationException();
+            throw new AuthorizationException;
         }
     }
 }

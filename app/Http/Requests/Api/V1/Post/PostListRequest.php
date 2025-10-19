@@ -6,7 +6,6 @@ use App\Http\Requests\Api\V1\ListRequest;
 
 class PostListRequest extends ListRequest
 {
-
     public const string USER_ID = 'user_id';
 
     /**
@@ -20,12 +19,8 @@ class PostListRequest extends ListRequest
         ];
     }
 
-
-
     /**
      * Получить user_id.
-     *
-     * @return int
      */
     public function getUserId(): int
     {

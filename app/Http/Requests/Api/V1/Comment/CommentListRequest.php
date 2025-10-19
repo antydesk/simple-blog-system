@@ -6,8 +6,8 @@ use App\Http\Requests\Api\V1\ListRequest;
 
 class CommentListRequest extends ListRequest
 {
-
     public const string USER_ID = 'user_id';
+
     public const string POST_ID = 'post_id';
 
     /**
@@ -23,8 +23,6 @@ class CommentListRequest extends ListRequest
 
     /**
      * Получить user_id.
-     *
-     * @return int
      */
     public function getUserId(): int
     {
@@ -33,8 +31,6 @@ class CommentListRequest extends ListRequest
 
     /**
      * Получить user_id.
-     *
-     * @return int
      */
     public function getPostId(): int
     {

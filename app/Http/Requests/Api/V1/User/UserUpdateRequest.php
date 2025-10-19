@@ -6,8 +6,8 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UserUpdateRequest extends FormRequest
 {
-
     public const string NAME = 'name';
+
     public const string EMAIL = 'email';
 
     /**
@@ -27,7 +27,7 @@ class UserUpdateRequest extends FormRequest
                 'required',
                 'string',
                 'email',
-            ]
+            ],
         ];
     }
 
@@ -43,8 +43,7 @@ class UserUpdateRequest extends FormRequest
 
     public function getId(): int
     {
-        return  $this->route('user_id');
+        return (int) $this->route('user_id');
 
     }
-
 }

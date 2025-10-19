@@ -2,13 +2,13 @@
 
 namespace App\Swagger\V1\Comment\Resources;
 
-
 /**
  * @OA\Schema(
  *     schema="CommentWithParentResource",
  *     title="CommentResource",
  *     description="Ресурс комментария",
  *     type="object",
+ *
  *     @OA\Property(
  *         property="id",
  *         type="integer",
@@ -39,6 +39,4 @@ namespace App\Swagger\V1\Comment\Resources;
  *     )
  * )
  */
-interface CommentWithParentResourceInterface
-{
-}
+interface CommentWithParentResourceInterface {}

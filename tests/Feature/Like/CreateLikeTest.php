@@ -29,7 +29,7 @@ class CreateLikeTest extends TestCase
                     'likeable',
                     'created_at',
                     'updated_at',
-                ]
+                ],
             ]);
 
         $this->assertDatabaseHas('likes', [
@@ -38,6 +38,4 @@ class CreateLikeTest extends TestCase
             'likeable_type' => Post::class,
         ]);
     }
-
-
 }

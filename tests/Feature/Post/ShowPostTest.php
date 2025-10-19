@@ -31,7 +31,7 @@ class ShowPostTest extends TestCase
                         'id' => $post->user_id,
                         'name' => $post->user->name,
                         'email' => $post->user->email,
-                    ]
+                    ],
                 ],
             ]);
 
@@ -46,9 +46,8 @@ class ShowPostTest extends TestCase
                     'id',
                     'name',
                     'email',
-                ]
-            ]
+                ],
+            ],
         ]);
     }
-
 }

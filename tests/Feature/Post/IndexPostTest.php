@@ -35,7 +35,7 @@ class IndexPostTest extends TestCase
                 ],
             ]);
 
-        $response->assertJson(fn(AssertableJson $json) => $json->has('data', 3)
+        $response->assertJson(fn (AssertableJson $json) => $json->has('data', 3)
             ->has('data.0.id')
             ->has('data.0.title')
             ->has('data.0.content')
@@ -65,6 +65,4 @@ class IndexPostTest extends TestCase
 
         $response->assertForbidden();
     }
-
-
 }

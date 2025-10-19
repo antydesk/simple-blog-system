@@ -24,21 +24,20 @@ class PostType extends GraphQLType
             // belongsTo User
             'user' => [
                 'type' => GraphQL::type('User'),
-                'resolve' => fn(Post $post) => $post->user,
+                'resolve' => fn (Post $post) => $post->user,
             ],
 
             // hasMany comments
             'comments' => [
                 'type' => Type::listOf(GraphQL::type('Comment')),
-                'resolve' => fn(Post $post) => $post->comments()->with('user')->get(),
+                'resolve' => fn (Post $post) => $post->comments()->with('user')->get(),
             ],
 
             // подсчёт лайков
             'likesCount' => [
                 'type' => Type::nonNull(Type::int()),
-                'resolve' => fn(Post $post) => $post->likes()->count(),
+                'resolve' => fn (Post $post) => $post->likes()->count(),
             ],
         ];
     }
 }
-

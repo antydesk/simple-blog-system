@@ -9,8 +9,6 @@ use Laravel\Passport\Exceptions\OAuthServerException;
 class RefreshTokenAction extends ParentAuthAction
 {
     /**
-     * @param string $refreshToken
-     * @return array
      * @throws AuthorizationException
      * @throws AuthenticationException
      * @throws OAuthServerException

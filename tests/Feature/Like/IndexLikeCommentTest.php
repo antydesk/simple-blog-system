@@ -55,7 +55,7 @@ class IndexLikeCommentTest extends TestCase
                         ],
                         'created_at' => $like_2->created_at->toDateTimeString(),
                         'updated_at' => $like_2->updated_at->toDateTimeString(),
-                    ]
+                    ],
                 ],
             ]);
     }

@@ -2,10 +2,8 @@
 
 namespace App\Services\Api\V1\Auth\Actions;
 
-
 use App\Dto\Api\V1\Auth\UserLoginDto;
 use App\Dto\Api\V1\Auth\UserRegisterDto;
-use App\Http\Resources\Api\V1\Auth\CredentialResource;
 use App\Repository\Api\V1\Read\User\UserReadRepositoryInterface;
 use App\Repository\Api\V1\Write\User\UserWriteRepositoryInterface;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -18,8 +16,7 @@ class RegisterAction
         protected UserReadRepositoryInterface $userReadRepository,
         protected UserWriteRepositoryInterface $userWriteRepository,
         protected LoginAction $loginAction,
-    ) {
-    }
+    ) {}
 
     /**
      * @throws AuthorizationException
@@ -30,7 +27,7 @@ class RegisterAction
     {
         $this->userWriteRepository->create($dto);
 
-        $userLoginDto = new UserLoginDto();
+        $userLoginDto = new UserLoginDto;
 
         $userLoginDto->email = $dto->email;
         $userLoginDto->password = $dto->password;

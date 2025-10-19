@@ -7,7 +7,7 @@ use App\Http\Requests\Api\V1\Post\PostListRequest;
 
 class PostListDto extends ListDto
 {
-    public ?string $user_id;
+    public ?int $user_id;
 
     public static function fromRequest(PostListRequest $request): self
     {
@@ -18,5 +18,4 @@ class PostListDto extends ListDto
             'user_id' => $request->getUserId(),
         ]);
     }
-
 }

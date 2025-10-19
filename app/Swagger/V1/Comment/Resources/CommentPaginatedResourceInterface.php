@@ -8,11 +8,14 @@ namespace App\Swagger\V1\Comment\Resources;
  *     title="CommentPaginatedResource",
  *     description="Пагинированный список комментариев",
  *     type="object",
+ *
  *     @OA\Property(
  *         property="data",
  *         type="array",
+ *
  *         @OA\Items(ref="#/components/schemas/CommentOnlyResource")
  *     ),
+ *
  *     @OA\Property(
  *         property="links",
  *         type="object",
@@ -34,7 +37,4 @@ namespace App\Swagger\V1\Comment\Resources;
  *     )
  * )
  */
-
-interface CommentPaginatedResourceInterface
-{
-}
+interface CommentPaginatedResourceInterface {}

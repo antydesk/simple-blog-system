@@ -8,6 +8,7 @@ namespace App\Swagger\V1\Comment\Resources;
  *     title="CommentResource",
  *     description="Ресурс комментария",
  *     type="object",
+ *
  *     @OA\Property(
  *         property="id",
  *         type="integer",
@@ -26,6 +27,4 @@ namespace App\Swagger\V1\Comment\Resources;
  *     )
  * )
  */
-interface CommentOnlyResourceInterface
-{
-}
+interface CommentOnlyResourceInterface {}

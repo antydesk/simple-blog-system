@@ -37,7 +37,7 @@ class CreatePostTest extends TestCase
                 'content',
                 'created_at',
                 'updated_at',
-            ]
+            ],
         ]);
     }
 
@@ -106,5 +106,4 @@ class CreatePostTest extends TestCase
         $response->assertUnprocessable()
             ->assertJsonValidationErrors(['content']);
     }
-
 }

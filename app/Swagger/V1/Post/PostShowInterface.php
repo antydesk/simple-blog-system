@@ -8,23 +8,30 @@ namespace App\Swagger\V1\Post;
  *     summary="Получить один пост",
  *     tags={"Post"},
  *     security={{"bearerAuth": {}}},
+ *
  *     @OA\Parameter(
  *         name="user_id",
  *         in="path",
  *         required=true,
+ *
  *         @OA\Schema(type="integer", example=1)
  *     ),
+ *
  *     @OA\Parameter(
  *         name="post_id",
  *         in="path",
  *         required=true,
+ *
  *         @OA\Schema(type="integer", example=10)
  *     ),
+ *
  *     @OA\Response(
  *         response=200,
  *         description="Информация о посте без связей",
+ *
  *          @OA\JsonContent(
  *              type="object",
+ *
  *              @OA\Property(
  *                  property="data",
  *                  ref="#/components/schemas/PostResource"
@@ -33,6 +40,4 @@ namespace App\Swagger\V1\Post;
  *     )
  * )
  */
-interface PostShowInterface
-{
-}
+interface PostShowInterface {}

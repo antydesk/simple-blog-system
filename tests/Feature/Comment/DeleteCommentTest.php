@@ -76,6 +76,4 @@ class DeleteCommentTest extends TestCase
 
         $response->assertUnauthorized();
     }
-
-
 }

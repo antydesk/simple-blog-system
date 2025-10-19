@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class UserController extends Controller
 {
-    public function show(string $user_id, UserShowAction $userShowAction): UserResource
+    public function show(int $user_id, UserShowAction $userShowAction): UserResource
     {
         $user = $userShowAction->run($user_id);
 

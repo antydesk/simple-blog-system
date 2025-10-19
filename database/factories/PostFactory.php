@@ -19,7 +19,7 @@ class PostFactory extends Factory
         return [
             'title' => fake()->title,
             'content' => fake()->text,
-//            'user_id'
+            //            'user_id'
         ];
     }
 }

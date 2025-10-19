@@ -8,7 +8,9 @@ use Spatie\LaravelData\Data;
 class PostCreateDto extends Data
 {
     public string $title;
+
     public string $content;
+
     public int $user_id;
 
     public static function fromRequest(PostCreateRequest $request): PostCreateDto

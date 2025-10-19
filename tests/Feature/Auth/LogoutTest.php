@@ -27,7 +27,7 @@ class LogoutTest extends TestCase
 
         $tokenData = json_decode($userAuthData->getContent(), true);
 
-        $response = $this->withHeader('Authorization', 'Bearer ' . $tokenData['data']['access_token'])->postJson(
+        $response = $this->withHeader('Authorization', 'Bearer '.$tokenData['data']['access_token'])->postJson(
             '/auth/logout'
         );
 

@@ -25,10 +25,10 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class AuthController extends Controller
 {
-//    public function __construct()
-//    {
-//        $this->middleware('auth:api', ['except' => ['login', 'register', 'refreshToken']]);
-//    }
+    //    public function __construct()
+    //    {
+    //        $this->middleware('auth:api', ['except' => ['login', 'register', 'refreshToken']]);
+    //    }
 
     /**
      * @throws AuthorizationException
@@ -63,10 +63,6 @@ class AuthController extends Controller
             ->setStatusCode(ResponseAlias::HTTP_CREATED);
     }
 
-    /**
-     * @param LogOutAction $logOutAction
-     * @return JsonResponse
-     */
     public function logout(LogOutAction $logOutAction): JsonResponse
     {
         $user = Auth::user();

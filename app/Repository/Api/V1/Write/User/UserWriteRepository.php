@@ -9,7 +9,9 @@ use Illuminate\Database\Eloquent\Builder;
 
 class UserWriteRepository implements UserWriteRepositoryInterface
 {
-
+    /**
+     * @return Builder<User>
+     */
     public function query(): Builder
     {
         return User::query();
@@ -24,15 +26,17 @@ class UserWriteRepository implements UserWriteRepositoryInterface
         ]);
     }
 
-
     public function update(UserUpdateDto $userUpdateDto): User
     {
-        $this->query()->where('id', $userUpdateDto->id)->update([
+        /** @var User $user */
+        $user = $this->query()->findOrFail($userUpdateDto->id);
+
+        $user->update([
             'name' => $userUpdateDto->name,
             'email' => $userUpdateDto->email,
         ]);
 
-        return $this->query()->where('id', $userUpdateDto->id)->first();
+        return $user;
     }
 
     public function destroy(int $user_id): bool

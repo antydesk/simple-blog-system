@@ -18,9 +18,9 @@ class CommentFactory extends Factory
     {
         return [
             'content' => fake()->text,
-//            'post_id',
-//            'user_id',
-//            'parent_id',
+            //            'post_id',
+            //            'user_id',
+            //            'parent_id',
         ];
     }
 }

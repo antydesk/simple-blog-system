@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Api\V1\Auth;
 
-
 class LoginRequest extends AuthRequest
 {
     public const string REMEMBER = 'remember';
@@ -13,7 +12,7 @@ class LoginRequest extends AuthRequest
             self::REMEMBER => [
                 'boolean',
                 'nullable',
-            ]
+            ],
         ];
     }
 

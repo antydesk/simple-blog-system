@@ -15,6 +15,7 @@ namespace App\Swagger\V1;
  * )
  *
  * @OA\Compontents(
+ *
  *    @OA\SecurityScheme(
  *     securityScheme="bearerAuth",
  *     type="http",
@@ -24,6 +25,4 @@ namespace App\Swagger\V1;
  *  )
  * )
  */
-interface OpenApi
-{
-}
+interface OpenApi {}

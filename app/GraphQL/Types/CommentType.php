@@ -9,7 +9,6 @@ use Rebing\GraphQL\Support\Type as GraphQLType;
 
 class CommentType extends GraphQLType
 {
-
     protected $attributes = ['name' => 'Comment', 'model' => Comment::class];
 
     public function fields(): array
@@ -20,5 +19,4 @@ class CommentType extends GraphQLType
             'user' => ['type' => GraphQL::type('User')],
         ];
     }
-
 }
