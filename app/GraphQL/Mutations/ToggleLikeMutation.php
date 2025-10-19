@@ -10,7 +10,6 @@ use GraphQL\Type\Definition\Type;
 use Illuminate\Support\Facades\Auth;
 use Rebing\GraphQL\Support\Mutation;
 
-
 class ToggleLikeMutation extends Mutation
 {
     protected $attributes = ['name' => 'toggleLike'];
@@ -29,8 +28,8 @@ class ToggleLikeMutation extends Mutation
         $root,
         array $args,
         $ctx,
-        ResolveInfo|null $resolveInfo = null,
-        Closure|null $getSelectFields = null
+        ?ResolveInfo $resolveInfo = null,
+        ?Closure $getSelectFields = null
     ): bool {
         return Auth::check(); // Passport: требуется Bearer токен
     }
@@ -52,11 +51,12 @@ class ToggleLikeMutation extends Mutation
 
         if ($like) {
             $like->delete();
+
             return false;
         }
 
         $post->likes()->create(['user_id' => $userId]);
+
         return true;
     }
 }
-

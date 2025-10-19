@@ -8,14 +8,12 @@ use App\Repository\Api\V1\Write\Post\PostWriteRepositoryInterface;
 
 class PostCreateAction
 {
-    public function __construct(protected PostWriteRepositoryInterface $postWriteRepository)
-    {
-    }
+    public function __construct(protected PostWriteRepositoryInterface $postWriteRepository) {}
 
     public function run(PostCreateDto $postCreateDto): Post
     {
-        $post =  $this->postWriteRepository->create($postCreateDto);
+        $post = $this->postWriteRepository->create($postCreateDto);
 
-        return  $post->load('user');
+        return $post->load('user');
     }
 }

@@ -3,14 +3,11 @@
 namespace App\Services\Api\V1\Like;
 
 use App\Dto\Api\V1\Like\IndexLikeCommentDto;
-use App\Dto\Api\V1\Like\IndexLikeDto;
 use App\Repository\Api\V1\Read\Like\LikeReadRepositoryInterface;
 
 class LikeCommentIndexAction
 {
-    public function __construct(protected LikeReadRepositoryInterface $likeReadRepository)
-    {
-    }
+    public function __construct(protected LikeReadRepositoryInterface $likeReadRepository) {}
 
     public function run(IndexLikeCommentDto $likeDto)
     {
@@ -18,5 +15,4 @@ class LikeCommentIndexAction
 
         return $data->load('user');
     }
-
 }

@@ -19,11 +19,11 @@ class PostResource extends JsonResource
     {
 
         return [
-            "id" => $this->resource->id,
-            "content" => $this->resource->content,
-            "title" => $this->resource->title,
-            "updated_at" => $this->resource->updated_at,
-            "created_at" => $this->resource->created_at,
+            'id' => $this->resource->id,
+            'content' => $this->resource->content,
+            'title' => $this->resource->title,
+            'updated_at' => $this->resource->updated_at,
+            'created_at' => $this->resource->created_at,
             'user' => new UserResource($this->whenLoaded('user')),
             'comments' => CommentResource::collection($this->whenLoaded('comments')),
             'likes' => LikeResource::collection($this->whenLoaded('likes')),

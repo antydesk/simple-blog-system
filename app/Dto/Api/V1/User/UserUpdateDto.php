@@ -8,7 +8,9 @@ use Spatie\LaravelData\Data;
 class UserUpdateDto extends Data
 {
     public string $name;
+
     public string $email;
+
     public int $id;
 
     public static function fromRequest(UserUpdateRequest $request): UserUpdateDto

@@ -9,10 +9,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 class CommentWriteRepository implements CommentWriteRepositoryInterface
 {
-    /**
-     * @param CommentCreateDto $commentCreateDto
-     * @return Comment
-     */
     public function create(CommentCreateDto $commentCreateDto): Comment
     {
         return $this->query()->create([
@@ -41,6 +37,7 @@ class CommentWriteRepository implements CommentWriteRepositoryInterface
     public function destroy(int $comment_id): bool
     {
         $comment = $this->query()->findOrFail($comment_id);
+
         return $comment->delete();
     }
 

@@ -7,9 +7,10 @@ use Spatie\LaravelData\Data;
 
 class IndexLikeCommentDto extends Data
 {
-
     public int $user_id;
+
     public int $post_id;
+
     public int $comment_id;
 
     public static function fromRequest(LikeCommentIndexRequest $commentIndexRequest): self

@@ -8,8 +8,11 @@ use Spatie\LaravelData\Data;
 class CommentCreateDto extends Data
 {
     public string $content;
+
     public int $user_id;
+
     public ?int $post_id;
+
     public ?int $parent_id;
 
     public static function fromRequest(CommentCreateRequest $request): CommentCreateDto
@@ -21,5 +24,4 @@ class CommentCreateDto extends Data
             'parent_id' => $request->getParentId(),
         ]);
     }
-
 }

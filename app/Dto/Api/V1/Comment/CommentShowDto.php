@@ -8,7 +8,9 @@ use Spatie\LaravelData\Data;
 class CommentShowDto extends Data
 {
     public int $user_id;
+
     public ?int $post_id;
+
     public int $id;
 
     public static function fromRequest(CommentShowRequest $request): CommentShowDto
@@ -19,5 +21,4 @@ class CommentShowDto extends Data
             'id' => $request->getCommentId(),
         ]);
     }
-
 }

@@ -11,14 +11,14 @@ class EnsureUserIsSelf
     /**
      * Handle an incoming request.
      *
-     * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
+     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
     {
         $routeUserId = $request->route('user_id');
         $authenticatedUserId = auth()->id();
 
-        if ((int)$routeUserId != $authenticatedUserId) {
+        if ((int) $routeUserId != $authenticatedUserId) {
             return response()->json([
                 'message' => 'Access denied. This is not your resource.',
             ], Response::HTTP_FORBIDDEN);

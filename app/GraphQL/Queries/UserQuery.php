@@ -1,6 +1,7 @@
 <?php
 
 // app/GraphQL/Queries/UserQuery.php
+
 namespace App\GraphQL\Queries;
 
 use App\Models\User;

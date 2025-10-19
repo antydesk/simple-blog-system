@@ -49,15 +49,14 @@ class PostsQuery extends Query
             ->select($select ?: ['*'])
             ->with($relations);
 
-        if (!empty($args['user_id'])) {
+        if (! empty($args['user_id'])) {
             $q->where('user_id', $args['user_id']);
         }
-        if (!empty($args['search'])) {
+        if (! empty($args['search'])) {
             // для PostgreSQL: ILIKE; для MySQL — LIKE
-            $q->where('title', 'ILIKE', '%' . $args['search'] . '%');
+            $q->where('title', 'ILIKE', '%'.$args['search'].'%');
         }
 
         return $q->offset($args['offset'])->limit($args['limit'])->get();
     }
 }
-

@@ -6,9 +6,10 @@ use App\Http\Requests\Api\V1\ListRequest;
 
 class CommentChildrenListRequest extends ListRequest
 {
-
     public const string USER_ID = 'user_id';
+
     public const string POST_ID = 'post_id';
+
     public const string PARENT_ID = 'comment_id';
 
     /**
@@ -24,8 +25,6 @@ class CommentChildrenListRequest extends ListRequest
 
     /**
      * Получить user_id.
-     *
-     * @return int
      */
     public function getUserId(): int
     {
@@ -34,8 +33,6 @@ class CommentChildrenListRequest extends ListRequest
 
     /**
      * Получить user_id.
-     *
-     * @return int
      */
     public function getPostId(): int
     {
@@ -44,8 +41,6 @@ class CommentChildrenListRequest extends ListRequest
 
     /**
      * Получить user_id.
-     *
-     * @return int
      */
     public function getParentId(): int
     {

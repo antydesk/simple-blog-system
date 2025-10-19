@@ -8,7 +8,9 @@ use Spatie\LaravelData\Data;
 class UserRegisterDto extends Data
 {
     public string $name;
+
     public string $email;
+
     public string $password;
 
     public static function fromRequest(RegisterRequest $request): self

@@ -8,9 +8,7 @@ use App\Repository\Api\V1\Write\Comment\CommentWriteRepositoryInterface;
 
 class CommentCreateAction
 {
-    public function __construct(protected CommentWriteRepositoryInterface $commentWriteRepository)
-    {
-    }
+    public function __construct(protected CommentWriteRepositoryInterface $commentWriteRepository) {}
 
     public function run(CommentCreateDto $commentCreateDto): Comment
     {
@@ -18,7 +16,7 @@ class CommentCreateAction
 
         $relations = ['post', 'user'];
 
-        if($commentCreateDto->parent_id){
+        if ($commentCreateDto->parent_id) {
             $relations[] = 'parent';
         }
 

@@ -17,10 +17,6 @@ class UserWriteRepository implements UserWriteRepositoryInterface
         return User::query();
     }
 
-    /**
-     * @param UserRegisterDto $userRegisterDto
-     * @return User
-     */
     public function create(UserRegisterDto $userRegisterDto): User
     {
         return $this->query()->create([
@@ -30,10 +26,6 @@ class UserWriteRepository implements UserWriteRepositoryInterface
         ]);
     }
 
-    /**
-     * @param UserUpdateDto $userUpdateDto
-     * @return User
-     */
     public function update(UserUpdateDto $userUpdateDto): User
     {
         /** @var User $user */

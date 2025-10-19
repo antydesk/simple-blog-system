@@ -7,12 +7,10 @@ use App\Repository\Api\V1\Read\Post\PostReadRepositoryInterface;
 
 class PostShowAction
 {
-    public function __construct(protected PostReadRepositoryInterface $postReadRepository)
-    {
-    }
+    public function __construct(protected PostReadRepositoryInterface $postReadRepository) {}
 
     public function run(int $post_id): Post
     {
-        return $this->postReadRepository->getById($post_id,['user','comments','likes']);
+        return $this->postReadRepository->getById($post_id, ['user', 'comments', 'likes']);
     }
 }

@@ -7,8 +7,8 @@ use Spatie\LaravelData\Data;
 
 class IndexLikeDto extends Data
 {
-
     public int $user_id;
+
     public int $post_id;
 
     public static function fromRequest(LikeIndexRequest $likeCreateRequest): self

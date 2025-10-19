@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserReadRepository implements UserReadRepositoryInterface
 {
-
     public function getById(int $id, array $relations = []): User
     {
         $user = User::query()
@@ -17,7 +16,7 @@ class UserReadRepository implements UserReadRepositoryInterface
             ->first();
 
         if (is_null($user)) {
-            throw new ModelNotFoundException(); // TODO create UserNotFoundException
+            throw new ModelNotFoundException; // TODO create UserNotFoundException
         }
 
         return $user;
@@ -36,7 +35,7 @@ class UserReadRepository implements UserReadRepositoryInterface
             ->first();
 
         if (is_null($user)) {
-            throw new ModelNotFoundException();  // TODO create UserNotFoundException
+            throw new ModelNotFoundException;  // TODO create UserNotFoundException
         }
 
         return $user;

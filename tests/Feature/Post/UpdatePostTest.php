@@ -40,7 +40,7 @@ class UpdatePostTest extends TestCase
                 'content',
                 'created_at',
                 'updated_at',
-            ]
+            ],
         ]);
     }
 
@@ -134,9 +134,9 @@ class UpdatePostTest extends TestCase
         ]);
 
         $response->assertForbidden()
-        ->assertJson([
-            'message' => 'You are not allowed to delete this post.'
-        ]);
+            ->assertJson([
+                'message' => 'You are not allowed to delete this post.',
+            ]);
     }
 
     public function test_update_post_with_invalid_user_id(): void

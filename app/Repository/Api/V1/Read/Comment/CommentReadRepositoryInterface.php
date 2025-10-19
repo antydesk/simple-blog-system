@@ -9,6 +9,5 @@ interface CommentReadRepositoryInterface
 {
     public function getById(int $id, array $relations = []): Comment;
 
-    public function paginate(int $userId,int $postId, int $perPage, int $page, ?string $q = null, array $relations = [],?int $parentId = null): LengthAwarePaginator;
-
+    public function paginate(int $userId, int $postId, int $perPage, int $page, ?string $q = null, array $relations = [], ?int $parentId = null): LengthAwarePaginator;
 }

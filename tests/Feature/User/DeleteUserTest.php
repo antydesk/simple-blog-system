@@ -23,7 +23,7 @@ class DeleteUserTest extends TestCase
         $this->assertDatabaseMissing('users', ['id' => $user->id]);
 
         $this->assertEquals(
-            "User deleted successfully",
+            'User deleted successfully',
             $response->json('message')
         );
     }

@@ -30,7 +30,7 @@ class IndexCommentTest extends TestCase
         $response->assertOk()
             ->assertJsonStructure([
                 'data' => [
-                    '*' => ['id', 'content', 'created_at', 'updated_at']
+                    '*' => ['id', 'content', 'created_at', 'updated_at'],
                 ],
                 'links' => ['first', 'last', 'prev', 'next'],
                 'meta' => [
@@ -41,8 +41,8 @@ class IndexCommentTest extends TestCase
                     'path',
                     'per_page',
                     'to',
-                    'total'
-                ]
+                    'total',
+                ],
             ])
             ->assertJsonCount(3, 'data')
             ->assertJsonFragment(['total' => 3]);
@@ -82,5 +82,4 @@ class IndexCommentTest extends TestCase
             ->assertJsonCount(0, 'data')
             ->assertJsonPath('meta.total', 0);
     }
-
 }

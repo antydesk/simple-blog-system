@@ -14,13 +14,16 @@ namespace App\Swagger\V1\User;
  *         name="user_id",
  *         in="path",
  *         required=true,
+ *
  *         @OA\Schema(type="integer", example=1)
  *     ),
  *
  *     @OA\RequestBody(
  *         required=true,
+ *
  *         @OA\JsonContent(
  *             required={"email", "name"},
+ *
  *             @OA\Property(property="email", type="string", format="email", example="bob@example.com"),
  *             @OA\Property(property="name", type="string", example="Bob")
  *         )
@@ -29,7 +32,9 @@ namespace App\Swagger\V1\User;
  *     @OA\Response(
  *         response=200,
  *         description="Информация о пользователе",
+ *
  *         @OA\JsonContent(
+ *
  *             @OA\Property(
  *                 property="data",
  *                 type="object",
@@ -43,7 +48,9 @@ namespace App\Swagger\V1\User;
  *     @OA\Response(
  *         response=401,
  *         description="Не авторизован",
+ *
  *         @OA\JsonContent(
+ *
  *             @OA\Property(property="message", type="string", example="Unauthenticated")
  *         )
  *     ),
@@ -51,7 +58,9 @@ namespace App\Swagger\V1\User;
  *     @OA\Response(
  *         response=422,
  *         description="Ошибка валидации",
+ *
  *         @OA\JsonContent(
+ *
  *             @OA\Property(property="message", type="string", example="Поле email уже существует."),
  *             @OA\Property(
  *                 property="errors",
@@ -62,6 +71,4 @@ namespace App\Swagger\V1\User;
  *     )
  * )
  */
-interface UserUpdateInterface
-{
-}
+interface UserUpdateInterface {}

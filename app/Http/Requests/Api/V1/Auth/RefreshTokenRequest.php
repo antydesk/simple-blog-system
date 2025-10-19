@@ -14,7 +14,7 @@ class RefreshTokenRequest extends FormRequest
             self::REFRESH_TOKEN => [
                 'string',
                 'required',
-            ]
+            ],
         ];
     }
 

@@ -10,7 +10,6 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class PostReadRepository implements PostReadRepositoryInterface
 {
-
     public function getById(int $id, array $relations = []): Post
     {
         /** @var ?Post $post */
@@ -20,7 +19,7 @@ class PostReadRepository implements PostReadRepositoryInterface
             ->first();
 
         if (is_null($post)) {
-            throw new ModelNotFoundException(); // TODO create PostNotFoundException
+            throw new ModelNotFoundException; // TODO create PostNotFoundException
         }
 
         return $post;
@@ -60,6 +59,4 @@ class PostReadRepository implements PostReadRepositoryInterface
         return $query->orderByDesc('created_at')
             ->paginate(perPage: $perPage, page: $page);
     }
-
-
 }

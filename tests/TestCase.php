@@ -9,14 +9,13 @@ use Laravel\Passport\Client;
 
 abstract class TestCase extends BaseTestCase
 {
-
     protected function setUp(): void
     {
         parent::setUp();
 
         $client = Client::query()->where('name', 'Test Password Client')->first();
 
-        if (!$client) {
+        if (! $client) {
             Artisan::call('passport:client', [
                 '--password' => true,
                 '--name' => 'Test Password Client',
@@ -28,5 +27,4 @@ abstract class TestCase extends BaseTestCase
         Config::set('passport.personal_access_client.id', $client->id);
         Config::set('passport.personal_access_client.secret', $client->secret);
     }
-
 }

@@ -13,5 +13,4 @@ interface PostReadRepositoryInterface
     public function getAll(int $user_id, array $relations = []): Collection;
 
     public function paginate(int $userId, int $perPage, int $page, ?string $q = null, array $relations = []): LengthAwarePaginator;
-
 }

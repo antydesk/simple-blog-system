@@ -8,9 +8,7 @@ use App\Models\Like;
 
 interface LikeWriteRepositoryInterface
 {
-
     public function createByPost(CreateLikeDto $data): Like;
 
     public function createByComment(CreateLikeCommentDto $data): Like;
-
 }

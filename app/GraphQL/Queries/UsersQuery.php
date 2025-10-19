@@ -21,4 +21,3 @@ class UsersQuery extends Query
         return User::query()->limit(100)->get();
     }
 }
-

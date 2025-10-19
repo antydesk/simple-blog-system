@@ -8,15 +8,12 @@ use App\Repository\Api\V1\Write\Like\LikeWriteRepositoryInterface;
 
 class LikeCreateAction
 {
-    public function __construct(protected LikeWriteRepositoryInterface $likeWriteRepository)
-    {
-    }
+    public function __construct(protected LikeWriteRepositoryInterface $likeWriteRepository) {}
 
     public function run(CreateLikeDto $createLikeDto): Like
     {
         $data = $this->likeWriteRepository->createByPost($createLikeDto);
 
-        return  $data->load('user','likeable');
+        return $data->load('user', 'likeable');
     }
-
 }

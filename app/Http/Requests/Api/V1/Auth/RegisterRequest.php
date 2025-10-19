@@ -7,7 +7,9 @@ use Illuminate\Foundation\Http\FormRequest;
 class RegisterRequest extends FormRequest
 {
     public const string NAME = 'name';
+
     public const string EMAIL = 'email';
+
     public const string PASSWORD = 'password';
 
     public function rules(): array
@@ -28,7 +30,7 @@ class RegisterRequest extends FormRequest
                 'required',
                 'string',
                 'between:5,255',
-            ]
+            ],
         ];
     }
 
@@ -36,7 +38,6 @@ class RegisterRequest extends FormRequest
     {
         return $this->get(self::NAME);
     }
-
 
     public function getEmail(): string
     {
@@ -47,5 +48,4 @@ class RegisterRequest extends FormRequest
     {
         return $this->get(self::PASSWORD);
     }
-
 }

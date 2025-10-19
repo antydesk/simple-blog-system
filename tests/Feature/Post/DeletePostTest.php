@@ -48,7 +48,7 @@ class DeletePostTest extends TestCase
 
         $response->assertNotFound()
             ->assertJson([
-                'message' => 'Post not found'
+                'message' => 'Post not found',
             ]);
     }
 
@@ -63,5 +63,4 @@ class DeletePostTest extends TestCase
         $response = $this->deleteJson("/api/v1/users/{$anotherUser->id}/posts/{$post->id}");
         $response->assertForbidden();
     }
-
 }

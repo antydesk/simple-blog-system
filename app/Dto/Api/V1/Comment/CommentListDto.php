@@ -8,6 +8,7 @@ use App\Http\Requests\Api\V1\Comment\CommentListRequest;
 class CommentListDto extends ListDto
 {
     public ?int $user_id;
+
     public ?int $post_id;
 
     public static function fromRequest(CommentListRequest $request): self
@@ -20,5 +21,4 @@ class CommentListDto extends ListDto
             'post_id' => $request->getPostId(),
         ]);
     }
-
 }

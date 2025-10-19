@@ -9,7 +9,9 @@ class ListRequest extends FormRequest
     public const int PER_PAGE_DEFAULT = 25;
 
     public const string PER_PAGE = 'per_page';
+
     public const string PAGE = 'page';
+
     public const string Q = 'q';
 
     public function rules(): array
@@ -18,11 +20,11 @@ class ListRequest extends FormRequest
             self::PER_PAGE => $this->getPerPageRule(),
             self::PAGE => [
                 'integer',
-                'nullable'
+                'nullable',
             ],
             self::Q => [
                 'string',
-                'nullable'
+                'nullable',
             ],
         ];
     }
@@ -47,4 +49,3 @@ class ListRequest extends FormRequest
         return 'integer|max:100|min:1';
     }
 }
-

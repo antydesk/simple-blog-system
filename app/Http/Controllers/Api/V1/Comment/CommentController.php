@@ -8,9 +8,9 @@ use App\Dto\Api\V1\Comment\CommentListDto;
 use App\Dto\Api\V1\Comment\CommentShowDto;
 use App\Dto\Api\V1\Comment\CommentUpdateDto;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\V1\Comment\CommentChildrenListRequest;
 use App\Http\Requests\Api\V1\Comment\CommentCreateRequest;
 use App\Http\Requests\Api\V1\Comment\CommentListRequest;
-use App\Http\Requests\Api\V1\Comment\CommentChildrenListRequest;
 use App\Http\Requests\Api\V1\Comment\CommentShowRequest;
 use App\Http\Requests\Api\V1\Comment\CommentUpdateRequest;
 use App\Http\Resources\Api\V1\Comment\CommentResource;
@@ -38,7 +38,6 @@ class CommentController extends Controller
     public function update(CommentUpdateRequest $request, CommentUpdateAction $commentUpdateAction): CommentResource
     {
         $commentCreateDto = CommentUpdateDto::fromRequest($request);
-
 
         $comment = $commentUpdateAction->run($commentCreateDto);
 
@@ -71,7 +70,7 @@ class CommentController extends Controller
         return response()->json(['message' => 'Comment deleted successfully.'], ResponseAlias::HTTP_OK);
     }
 
-    public function getChildren(CommentChildrenListRequest $commentRepliesListRequest,CommentChildrenIndexAction $commentChildrenIndexAction): AnonymousResourceCollection
+    public function getChildren(CommentChildrenListRequest $commentRepliesListRequest, CommentChildrenIndexAction $commentChildrenIndexAction): AnonymousResourceCollection
     {
         $dto = CommentChildrenListDto::fromRequest($commentRepliesListRequest);
 

@@ -8,6 +8,7 @@ namespace App\Swagger\V1\Post\Resources;
  *     title="PostResource",
  *     description="Ресурс поста",
  *     type="object",
+ *
  *     @OA\Property(
  *         property="id",
  *         type="integer",
@@ -42,15 +43,16 @@ namespace App\Swagger\V1\Post\Resources;
  *     @OA\Property(
  *         property="comments",
  *         type="array",
+ *
  *         @OA\Items(ref="#/components/schemas/CommentResource")
  *     ),
+ *
  *     @OA\Property(
  *         property="likes",
  *         type="array",
+ *
  *         @OA\Items(ref="#/components/schemas/LikePostResource")
  *     )
  * )
  */
-interface PostResourceInterface
-{
-}
+interface PostResourceInterface {}

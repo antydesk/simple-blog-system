@@ -51,7 +51,7 @@ class GetChildrenCommentsTest extends TestCase
                     'from',
                     'last_page',
                     'links' => [
-                        '*' => ['url', 'label', 'active']
+                        '*' => ['url', 'label', 'active'],
                     ],
                     'path',
                     'per_page',
@@ -87,6 +87,4 @@ class GetChildrenCommentsTest extends TestCase
             ->assertJsonPath('meta.per_page', 10)
             ->assertJsonCount(10, 'data');
     }
-
-
 }

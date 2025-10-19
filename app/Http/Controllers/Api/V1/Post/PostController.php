@@ -21,7 +21,6 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class PostController extends Controller
 {
-
     public function create(PostCreateRequest $postCreateRequest, PostCreateAction $postCreateAction): PostResource
     {
         $dto = PostCreateDto::fromRequest($postCreateRequest);
@@ -55,7 +54,6 @@ class PostController extends Controller
 
         return PostResource::collection($posts);
     }
-
 
     public function destroy(int $user_id, int $post_id, PostDestroyAction $postDestroyAction): JsonResponse
     {

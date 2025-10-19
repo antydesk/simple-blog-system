@@ -12,8 +12,8 @@ class UpdatePostInput extends InputType
     public function fields(): array
     {
         return [
-            'title'   => ['type' => Type::string(), 'rules' => ['sometimes','string','max:255']],
-            'content' => ['type' => Type::string(), 'rules' => ['sometimes','string']],
+            'title' => ['type' => Type::string(), 'rules' => ['sometimes', 'string', 'max:255']],
+            'content' => ['type' => Type::string(), 'rules' => ['sometimes', 'string']],
         ];
     }
 }

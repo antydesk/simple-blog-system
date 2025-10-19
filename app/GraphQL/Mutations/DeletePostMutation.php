@@ -1,6 +1,7 @@
 <?php
 
 // app/GraphQL/Mutations/DeletePostMutation.php
+
 namespace App\GraphQL\Mutations;
 
 use App\Models\Post;
@@ -28,8 +29,8 @@ class DeletePostMutation extends Mutation
         $root,
         array $args,
         $ctx,
-        ResolveInfo|null $resolveInfo = null,
-        Closure|null $getSelectFields = null
+        ?ResolveInfo $resolveInfo = null,
+        ?Closure $getSelectFields = null
     ): bool {
         return Auth::check(); // Passport: требуется Bearer токен
     }
@@ -43,7 +44,7 @@ class DeletePostMutation extends Mutation
     {
         $post = Post::findOrFail($args['id']);
         abort_unless($post->user_id === Auth::id(), 403, 'Forbidden');
-        return (bool)$post->delete();
+
+        return (bool) $post->delete();
     }
 }
-

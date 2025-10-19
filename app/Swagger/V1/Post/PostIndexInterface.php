@@ -10,21 +10,26 @@ namespace App\Swagger\V1\Post;
  *     description="Возвращает список всех постов, принадлежащих указанному пользователю",
  *     tags={"Post"},
  *     security={{"bearerAuth": {}}},
+ *
  *     @OA\Parameter(
  *         name="user_id",
  *         in="path",
  *         description="ID пользователя, чьи посты нужно получить",
  *         required=true,
+ *
  *         @OA\Schema(
  *             type="integer",
  *             example=1
  *         )
  *     ),
+ *
  *     @OA\Response(
  *         response=200,
  *         description="Успешный ответ. Список постов пользователя.",
+ *
  *          @OA\JsonContent(ref="#/components/schemas/PostPaginatedResource")
  *     ),
+ *
  *     @OA\Response(
  *         response=401,
  *         description="Неавторизован"
@@ -35,6 +40,4 @@ namespace App\Swagger\V1\Post;
  *     )
  * )
  */
-interface PostIndexInterface
-{
-}
+interface PostIndexInterface {}

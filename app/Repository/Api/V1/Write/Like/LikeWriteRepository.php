@@ -11,30 +11,21 @@ use Illuminate\Database\Eloquent\Builder;
 
 class LikeWriteRepository implements LikeWriteRepositoryInterface
 {
-
-    /**
-     * @param CreateLikeDto $data
-     * @return Like
-     */
     public function createByPost(CreateLikeDto $data): Like
     {
         return $this->query()->create([
             'user_id' => $data->user_id,
             'likeable_id' => $data->post_id,
-            'likeable_type' => Post::class
+            'likeable_type' => Post::class,
         ]);
     }
 
-    /**
-     * @param CreateLikeCommentDto $data
-     * @return   Like
-     */
     public function createByComment(CreateLikeCommentDto $data): Like
     {
         return $this->query()->create([
             'user_id' => $data->user_id,
             'likeable_id' => $data->comment_id,
-            'likeable_type' => Comment::class
+            'likeable_type' => Comment::class,
         ]);
     }
 
@@ -45,6 +36,4 @@ class LikeWriteRepository implements LikeWriteRepositoryInterface
     {
         return Like::query();
     }
-
-
 }

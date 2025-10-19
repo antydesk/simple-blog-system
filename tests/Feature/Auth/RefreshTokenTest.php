@@ -28,11 +28,11 @@ class RefreshTokenTest extends TestCase
         $response->assertOk();
         $response->assertJsonStructure([
             'data' => [
-                "access_token",
-                "refresh_token",
-                "token_type",
-                "expires_in"
-            ]
+                'access_token',
+                'refresh_token',
+                'token_type',
+                'expires_in',
+            ],
         ]);
     }
 }

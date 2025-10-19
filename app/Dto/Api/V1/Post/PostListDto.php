@@ -18,5 +18,4 @@ class PostListDto extends ListDto
             'user_id' => $request->getUserId(),
         ]);
     }
-
 }

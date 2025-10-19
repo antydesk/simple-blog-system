@@ -8,9 +8,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class PostIndexAction
 {
-    public function __construct(protected PostReadRepositoryInterface $postReadRepository)
-    {
-    }
+    public function __construct(protected PostReadRepositoryInterface $postReadRepository) {}
 
     public function run(PostListDto $postListDto): LengthAwarePaginator
     {
@@ -19,7 +17,7 @@ class PostIndexAction
             perPage: $postListDto->perPage,
             page: $postListDto->page,
             q: $postListDto->q,
-            relations: ['user','comments','likes'],
+            relations: ['user', 'comments', 'likes'],
         );
     }
 }

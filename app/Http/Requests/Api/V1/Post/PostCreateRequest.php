@@ -3,12 +3,13 @@
 namespace App\Http\Requests\Api\V1\Post;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class PostCreateRequest extends FormRequest
 {
     public const string TITLE = 'title';
+
     public const string CONTENT = 'content';
+
     public const string USER_ID = 'user_id';
 
     /**
@@ -35,8 +36,6 @@ class PostCreateRequest extends FormRequest
 
     /**
      * Получить название поста.
-     *
-     * @return string
      */
     public function getTitle(): string
     {
@@ -45,9 +44,6 @@ class PostCreateRequest extends FormRequest
 
     /**
      * Получить содержимое поста.
-     *
-     * @param bool $asResource
-     * @return string
      */
     public function getContent(bool $asResource = false): string
     {
@@ -56,8 +52,6 @@ class PostCreateRequest extends FormRequest
 
     /**
      * Получить user_id.
-     *
-     * @return int
      */
     public function getUserId(): int
     {

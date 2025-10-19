@@ -14,13 +14,16 @@ namespace App\Swagger\V1\User;
  *         name="user_id",
  *         in="path",
  *         required=true,
+ *
  *         @OA\Schema(type="integer", example=1)
  *     ),
  *
  *     @OA\Response(
  *         response=200,
  *         description="Пользователь успешно удалён",
+ *
  *         @OA\JsonContent(
+ *
  *             @OA\Property(property="message", type="string", example="User deleted successfully")
  *         )
  *     ),
@@ -28,7 +31,9 @@ namespace App\Swagger\V1\User;
  *     @OA\Response(
  *         response=401,
  *         description="Не авторизован",
+ *
  *         @OA\JsonContent(
+ *
  *             @OA\Property(property="message", type="string", example="Unauthenticated")
  *         )
  *     ),
@@ -36,13 +41,12 @@ namespace App\Swagger\V1\User;
  *     @OA\Response(
  *         response=404,
  *         description="Пользователь не найден",
+ *
  *         @OA\JsonContent(
+ *
  *             @OA\Property(property="message", type="string", example="User not found")
  *         )
  *     )
  * )
  */
-interface UserDestroyInterface
-{
-}
-
+interface UserDestroyInterface {}

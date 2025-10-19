@@ -23,25 +23,28 @@ class ParentAuthAction
     use HandlesOAuthErrors;
 
     protected User $user;
+
     protected array $tokenData = [];
+
     protected ?Client $client = null; // ✅ исправлено: может быть null и не readonly
+
     protected UserLoginDto $dto;
+
     protected ServerRequestInterface $serverRequest;
 
     public function __construct(
         protected readonly AuthorizationServer $server,
         protected readonly UserReadRepositoryInterface $userReadRepository,
         protected readonly UserWriteRepositoryInterface $userWriteRepository,
-    ) {
-    }
+    ) {}
 
     protected function createServerRequest(): void
     {
         $this->serverRequest = (new PsrHttpFactory(
-            new Psr17Factory(),
-            new Psr17Factory(),
-            new Psr17Factory(),
-            new Psr17Factory()
+            new Psr17Factory,
+            new Psr17Factory,
+            new Psr17Factory,
+            new Psr17Factory
         ))->createRequest(request());
     }
 
@@ -63,7 +66,7 @@ class ParentAuthAction
         $secret = Config::get('passport.client_credentials_client.secret');
 
         if ($data['client_secret'] !== $secret || $data['client_id'] !== $oClientId) {
-            throw new AuthenticationException();
+            throw new AuthenticationException;
         }
 
         $this->client = Client::query()
@@ -78,15 +81,15 @@ class ParentAuthAction
     {
         if ($this->client && $this->client->id && $this->client->secret) {
             $this->serverRequest = $this->serverRequest->withParsedBody([
-                'grant_type'    => 'password',
-                'username'      => $this->dto->email,
-                'client_id'     => $this->client->id,
-                'password'      => $this->dto->password,
+                'grant_type' => 'password',
+                'username' => $this->dto->email,
+                'client_id' => $this->client->id,
+                'password' => $this->dto->password,
                 'client_secret' => $this->client->secret,
-                'scope'         => '*',
+                'scope' => '*',
             ]);
         } else {
-            throw new AuthenticationException();
+            throw new AuthenticationException;
         }
     }
 
@@ -97,13 +100,13 @@ class ParentAuthAction
     {
         if ($this->client && $this->client->id && $this->client->secret) {
             $this->serverRequest = $this->serverRequest->withParsedBody([
-                'grant_type'    => 'client_credentials',
-                'client_id'     => $this->client->id,
+                'grant_type' => 'client_credentials',
+                'client_id' => $this->client->id,
                 'client_secret' => $this->client->secret,
-                'scope'         => 'report',
+                'scope' => 'report',
             ]);
         } else {
-            throw new AuthenticationException();
+            throw new AuthenticationException;
         }
     }
 
@@ -114,14 +117,14 @@ class ParentAuthAction
     {
         if ($this->client && $this->client->id && $this->client->secret) {
             $this->serverRequest = $this->serverRequest->withParsedBody([
-                'grant_type'    => 'refresh_token',
-                'client_id'     => $this->client->id,
+                'grant_type' => 'refresh_token',
+                'client_id' => $this->client->id,
                 'client_secret' => $this->client->secret,
                 'refresh_token' => $refreshToken,
-                'scope'         => '*',
+                'scope' => '*',
             ]);
         } else {
-            throw new AuthenticationException();
+            throw new AuthenticationException;
         }
     }
 
@@ -142,7 +145,7 @@ class ParentAuthAction
         $this->tokenData = json_decode($response->getContent(), true) ?? [];
 
         if (empty($this->tokenData)) {
-            throw new AuthorizationException();
+            throw new AuthorizationException;
         }
     }
 }

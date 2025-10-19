@@ -21,10 +21,6 @@ class PostWriteRepository implements PostWriteRepositoryInterface
         return Post::query();
     }
 
-    /**
-     * @param PostCreateDto $postCreateDto
-     * @return Post
-     */
     public function create(PostCreateDto $postCreateDto): Post
     {
         return $this->query()->create([
@@ -43,11 +39,11 @@ class PostWriteRepository implements PostWriteRepositoryInterface
         /** @var Post|null $post */
         $post = $this->query()->where('id', $postUpdateDto->id)->first();
 
-        if (!$post) {
+        if (! $post) {
             throw new NotFoundHttpException('Post not found.');
         }
 
-        if (!Gate::allows('update', $post)) {
+        if (! Gate::allows('update', $post)) {
             throw new AuthorizationException('You are not allowed to update this post.');
         }
 
@@ -66,11 +62,11 @@ class PostWriteRepository implements PostWriteRepositoryInterface
     {
         $post = $this->query()->where('id', $post_id)->first();
 
-        if (!$post) {
+        if (! $post) {
             throw new NotFoundHttpException('Post not found.');
         }
 
-        if (!Gate::allows('delete', $post)) {
+        if (! Gate::allows('delete', $post)) {
             throw new AuthorizationException('You are not allowed to delete this post.');
         }
 

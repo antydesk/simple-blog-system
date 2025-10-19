@@ -8,6 +8,7 @@ namespace App\Swagger\V1\Like\LikePostResource;
  *     title="LikePostResource",
  *     description="Ресурс Лайка для постов",
  *     type="object",
+ *
  *     @OA\Property (
  *         property="id",
  *         type="integer",
@@ -35,6 +36,4 @@ namespace App\Swagger\V1\Like\LikePostResource;
  *     )
  * )
  */
-interface LikePostResourceInterface
-{
-}
+interface LikePostResourceInterface {}
