@@ -8,9 +8,9 @@ use App\Http\Requests\Api\V1\Comment\CommentListRequest;
 
 class CommentChildrenListDto extends ListDto
 {
-    public string $user_id;
-    public string $post_id;
-    public string $parent_id;
+    public int $user_id;
+    public int $post_id;
+    public int $parent_id;
 
     public static function fromRequest(CommentChildrenListRequest $request): self
     {

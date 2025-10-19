@@ -12,6 +12,10 @@ use Illuminate\Database\Eloquent\Builder;
 class LikeWriteRepository implements LikeWriteRepositoryInterface
 {
 
+    /**
+     * @param CreateLikeDto $data
+     * @return Like
+     */
     public function createByPost(CreateLikeDto $data): Like
     {
         return $this->query()->create([
@@ -21,6 +25,10 @@ class LikeWriteRepository implements LikeWriteRepositoryInterface
         ]);
     }
 
+    /**
+     * @param CreateLikeCommentDto $data
+     * @return   Like
+     */
     public function createByComment(CreateLikeCommentDto $data): Like
     {
         return $this->query()->create([
@@ -30,6 +38,9 @@ class LikeWriteRepository implements LikeWriteRepositoryInterface
         ]);
     }
 
+    /**
+     * @return Builder<Like>
+     */
     private function query(): Builder
     {
         return Like::query();

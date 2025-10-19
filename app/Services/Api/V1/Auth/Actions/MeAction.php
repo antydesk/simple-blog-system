@@ -13,7 +13,7 @@ class MeAction
     ) {
     }
 
-    public function run(string $user_id): UserResource
+    public function run(int $user_id): UserResource
     {
         $user = $this->userReadRepository->getById($user_id);
 

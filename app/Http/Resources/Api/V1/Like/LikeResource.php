@@ -24,12 +24,12 @@ class LikeResource extends JsonResource
             'user' => new UserResource($this->whenLoaded('user')),
             'likeable' => $this->whenLoaded('likeable', function () {
                 // Можно сюда вложить другой ресурс в зависимости от типа
-                if ($this->likeable_type === Post::class) {
-                    return new PostResource($this->likeable);
+                if ($this->resource->likeable_type === Post::class) {
+                    return new PostResource($this->resource->likeable);
                 }
 
-                if ($this->likeable_type === Comment::class) {
-                    return new CommentResource($this->likeable);
+                if ($this->resource->likeable_type === Comment::class) {
+                    return new CommentResource($this->resource->likeable);
                 }
 
                 return null;

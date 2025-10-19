@@ -43,7 +43,7 @@ class UserUpdateRequest extends FormRequest
 
     public function getId(): int
     {
-        return  $this->route('user_id');
+        return  (int)$this->route('user_id');
 
     }
 

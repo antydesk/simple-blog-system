@@ -13,6 +13,7 @@ class PostReadRepository implements PostReadRepositoryInterface
 
     public function getById(int $id, array $relations = []): Post
     {
+        /** @var ?Post $post */
         $post = $this->query()
             ->where('id', $id)
             ->with($relations)

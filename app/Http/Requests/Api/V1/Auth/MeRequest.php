@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class MeRequest extends FormRequest
 {
-    public function getUserId(): string
+    public function getUserId(): int
     {
         return $this->user()->id;
     }

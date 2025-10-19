@@ -41,6 +41,6 @@ class CommentUpdateRequest extends FormRequest
 
     public function getCommentId(): int
     {
-        return $this->route(self::ID);
+        return (int)$this->route(self::ID);
     }
 }

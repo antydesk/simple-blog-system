@@ -11,7 +11,7 @@ class PostShowAction
     {
     }
 
-    public function run(string $post_id): Post
+    public function run(int $post_id): Post
     {
         return $this->postReadRepository->getById($post_id,['user','comments','likes']);
     }

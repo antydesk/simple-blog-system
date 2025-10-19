@@ -11,7 +11,7 @@ class UserShowAction
     {
     }
 
-    public function run(string $user_id): User
+    public function run(int $user_id): User
     {
         return $this->userReadRepository->getById($user_id);
     }

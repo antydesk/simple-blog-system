@@ -12,6 +12,7 @@ class CommentReadRepository implements CommentReadRepositoryInterface
 
     public function getById(int $id, array $relations = []): Comment
     {
+        /** @var ?Comment $comment */
         $comment = $this->query()
             ->where('id', $id)
             ->with($relations)
